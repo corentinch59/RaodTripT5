@@ -1,0 +1,34 @@
+{
+    "name": "KeyMap",
+    "maps": [
+        {
+            "name": "PlayerControls",
+            "id": "3d7b77de-dc7f-467e-813c-21e121f105b6",
+            "actions": [
+                {
+                    "name": "Input =3",
+                    "type": "Button",
+                    "id": "7245b6e2-3d5a-4d36-b5b1-412b21e10e55",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7e208d54-5aef-4a77-9bff-eb7c7f30e5d7",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Input =3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
