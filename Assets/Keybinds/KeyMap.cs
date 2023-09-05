@@ -28,26 +28,70 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             ""id"": ""3d7b77de-dc7f-467e-813c-21e121f105b6"",
             ""actions"": [
                 {
-                    ""name"": ""Input =3"",
-                    ""type"": ""Button"",
+                    ""name"": ""Dynamo"",
+                    ""type"": ""Value"",
                     ""id"": ""7245b6e2-3d5a-4d36-b5b1-412b21e10e55"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""7e208d54-5aef-4a77-9bff-eb7c7f30e5d7"",
-                    ""path"": """",
+                    ""name"": ""ENG binds"",
+                    ""id"": ""5d0b05a0-1820-4eca-bdbd-f63b572cc9b8"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Input =3"",
-                    ""isComposite"": false,
+                    ""action"": ""Dynamo"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""3bcca14e-657b-4f5f-8480-6e6a3b751326"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dynamo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""ec71577c-bada-476c-9ae0-6beebfdaffe5"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dynamo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""e090e07f-78b4-4e0d-94db-8a0c5bfe3626"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dynamo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""40ea11fe-164b-4157-9abf-41146820c3d6"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dynamo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -56,7 +100,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
 }");
         // PlayerControls
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
-        m_PlayerControls_Input3 = m_PlayerControls.FindAction("Input =3", throwIfNotFound: true);
+        m_PlayerControls_Dynamo = m_PlayerControls.FindAction("Dynamo", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -118,12 +162,12 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     // PlayerControls
     private readonly InputActionMap m_PlayerControls;
     private List<IPlayerControlsActions> m_PlayerControlsActionsCallbackInterfaces = new List<IPlayerControlsActions>();
-    private readonly InputAction m_PlayerControls_Input3;
+    private readonly InputAction m_PlayerControls_Dynamo;
     public struct PlayerControlsActions
     {
         private @KeyMap m_Wrapper;
         public PlayerControlsActions(@KeyMap wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Input3 => m_Wrapper.m_PlayerControls_Input3;
+        public InputAction @Dynamo => m_Wrapper.m_PlayerControls_Dynamo;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -133,16 +177,16 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerControlsActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerControlsActionsCallbackInterfaces.Add(instance);
-            @Input3.started += instance.OnInput3;
-            @Input3.performed += instance.OnInput3;
-            @Input3.canceled += instance.OnInput3;
+            @Dynamo.started += instance.OnDynamo;
+            @Dynamo.performed += instance.OnDynamo;
+            @Dynamo.canceled += instance.OnDynamo;
         }
 
         private void UnregisterCallbacks(IPlayerControlsActions instance)
         {
-            @Input3.started -= instance.OnInput3;
-            @Input3.performed -= instance.OnInput3;
-            @Input3.canceled -= instance.OnInput3;
+            @Dynamo.started -= instance.OnDynamo;
+            @Dynamo.performed -= instance.OnDynamo;
+            @Dynamo.canceled -= instance.OnDynamo;
         }
 
         public void RemoveCallbacks(IPlayerControlsActions instance)
@@ -162,6 +206,6 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     public PlayerControlsActions @PlayerControls => new PlayerControlsActions(this);
     public interface IPlayerControlsActions
     {
-        void OnInput3(InputAction.CallbackContext context);
+        void OnDynamo(InputAction.CallbackContext context);
     }
 }
