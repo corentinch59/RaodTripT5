@@ -34,4 +34,14 @@ public class PlayerManager : MonoBehaviour
         }
 
     }
+
+    public void DeclinePhone(InputAction.CallbackContext ctx)
+    {
+        if(GameManager.Instance.Cerveau1 is PhoneCall)
+        {
+            GameManager.Instance.Cerveau1.CompleteEvent();
+        }
+
+    }
+
 }

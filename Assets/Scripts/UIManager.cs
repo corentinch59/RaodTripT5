@@ -13,7 +13,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Image _wiperImage;
     [SerializeField] private GameObject _dusts;
-    
+
+    [SerializeField]private GameObject _phoneCallPopup;
+    public GameObject PhoneCallPopup => _phoneCallPopup;
 
     private static UIManager _instance;
     public static UIManager Instance => _instance;

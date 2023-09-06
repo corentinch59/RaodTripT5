@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-    private IEvent[] events = { new DustCloud() };
+    private IEvent[] events = { new DustCloud(), new PhoneCall() };
 
     private static EventManager _instance;
     public static EventManager Instance => _instance;
@@ -24,8 +24,9 @@ public class EventManager : MonoBehaviour
 
     public IEvent ChooseRandomEvent()
     {
-        int temp = Random.Range(0, events.Length);
+        //int temp = Random.Range(0, events.Length);
 
+        int temp = 1;
         IEvent chosenEvent = events[temp];
 
         return chosenEvent;
