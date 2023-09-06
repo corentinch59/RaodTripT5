@@ -44,6 +44,15 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold(duration=1)"",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PhoneCall"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d1d7e2c-a19b-4623-9b5e-c193a5f34bb6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -156,6 +165,17 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""action"": ""Wiper"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a8fa9d6-3575-449e-9307-0c50aee5533c"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PhoneCall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -166,6 +186,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
         m_PlayerControls_Dynamo = m_PlayerControls.FindAction("Dynamo", throwIfNotFound: true);
         m_PlayerControls_Wiper = m_PlayerControls.FindAction("Wiper", throwIfNotFound: true);
+        m_PlayerControls_PhoneCall = m_PlayerControls.FindAction("PhoneCall", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,12 +250,14 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     private List<IPlayerControlsActions> m_PlayerControlsActionsCallbackInterfaces = new List<IPlayerControlsActions>();
     private readonly InputAction m_PlayerControls_Dynamo;
     private readonly InputAction m_PlayerControls_Wiper;
+    private readonly InputAction m_PlayerControls_PhoneCall;
     public struct PlayerControlsActions
     {
         private @KeyMap m_Wrapper;
         public PlayerControlsActions(@KeyMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Dynamo => m_Wrapper.m_PlayerControls_Dynamo;
         public InputAction @Wiper => m_Wrapper.m_PlayerControls_Wiper;
+        public InputAction @PhoneCall => m_Wrapper.m_PlayerControls_PhoneCall;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -250,6 +273,9 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @Wiper.started += instance.OnWiper;
             @Wiper.performed += instance.OnWiper;
             @Wiper.canceled += instance.OnWiper;
+            @PhoneCall.started += instance.OnPhoneCall;
+            @PhoneCall.performed += instance.OnPhoneCall;
+            @PhoneCall.canceled += instance.OnPhoneCall;
         }
 
         private void UnregisterCallbacks(IPlayerControlsActions instance)
@@ -260,6 +286,9 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @Wiper.started -= instance.OnWiper;
             @Wiper.performed -= instance.OnWiper;
             @Wiper.canceled -= instance.OnWiper;
+            @PhoneCall.started -= instance.OnPhoneCall;
+            @PhoneCall.performed -= instance.OnPhoneCall;
+            @PhoneCall.canceled -= instance.OnPhoneCall;
         }
 
         public void RemoveCallbacks(IPlayerControlsActions instance)
@@ -281,5 +310,6 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     {
         void OnDynamo(InputAction.CallbackContext context);
         void OnWiper(InputAction.CallbackContext context);
+        void OnPhoneCall(InputAction.CallbackContext context);
     }
 }
