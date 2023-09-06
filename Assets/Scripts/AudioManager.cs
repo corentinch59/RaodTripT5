@@ -55,7 +55,6 @@ public class AudioManager : MonoBehaviour
         {
             Debug.Log(tempSound.Name + "doesn't exist");
         }
-        
     }
 
     public void PlaySound(AudioClip clip, AudioSource source)

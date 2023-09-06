@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
         DynamoFill += UpdateGoalDistance;
 
         NewEvent();
+
         AudioManager.Instance.PlaySound("TestSound");
     }
 
