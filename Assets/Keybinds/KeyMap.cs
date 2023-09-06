@@ -35,6 +35,15 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Wiper"",
+                    ""type"": ""Value"",
+                    ""id"": ""32884280-6bdd-4ee7-890e-78e4e632fece"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=1)"",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -92,6 +101,61 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""action"": ""Dynamo"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""78fe7823-dd4e-4e89-98ba-4fd887e9a05e"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Wiper"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""d61758c2-1392-4a6d-bff1-ce628d91218f"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Wiper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""04b976be-2770-4d16-9ed8-4e18e1733e6f"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Wiper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""783954ea-dd2c-40f8-a68a-82d135dbf14e"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Wiper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""e7b6e2f2-311d-4599-bf52-958b854fcda3"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Wiper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -101,6 +165,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         // PlayerControls
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
         m_PlayerControls_Dynamo = m_PlayerControls.FindAction("Dynamo", throwIfNotFound: true);
+        m_PlayerControls_Wiper = m_PlayerControls.FindAction("Wiper", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -163,11 +228,13 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerControls;
     private List<IPlayerControlsActions> m_PlayerControlsActionsCallbackInterfaces = new List<IPlayerControlsActions>();
     private readonly InputAction m_PlayerControls_Dynamo;
+    private readonly InputAction m_PlayerControls_Wiper;
     public struct PlayerControlsActions
     {
         private @KeyMap m_Wrapper;
         public PlayerControlsActions(@KeyMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Dynamo => m_Wrapper.m_PlayerControls_Dynamo;
+        public InputAction @Wiper => m_Wrapper.m_PlayerControls_Wiper;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -180,6 +247,9 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @Dynamo.started += instance.OnDynamo;
             @Dynamo.performed += instance.OnDynamo;
             @Dynamo.canceled += instance.OnDynamo;
+            @Wiper.started += instance.OnWiper;
+            @Wiper.performed += instance.OnWiper;
+            @Wiper.canceled += instance.OnWiper;
         }
 
         private void UnregisterCallbacks(IPlayerControlsActions instance)
@@ -187,6 +257,9 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @Dynamo.started -= instance.OnDynamo;
             @Dynamo.performed -= instance.OnDynamo;
             @Dynamo.canceled -= instance.OnDynamo;
+            @Wiper.started -= instance.OnWiper;
+            @Wiper.performed -= instance.OnWiper;
+            @Wiper.canceled -= instance.OnWiper;
         }
 
         public void RemoveCallbacks(IPlayerControlsActions instance)
@@ -207,5 +280,6 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     public interface IPlayerControlsActions
     {
         void OnDynamo(InputAction.CallbackContext context);
+        void OnWiper(InputAction.CallbackContext context);
     }
 }
