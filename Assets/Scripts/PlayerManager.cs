@@ -16,4 +16,22 @@ public class PlayerManager : MonoBehaviour
         }
         _previous = temp;
     }
+
+    public void Wiper(InputAction.CallbackContext ctx)
+    {
+        Vector2 temp = ctx.ReadValue<Vector2>();
+
+        if(temp.x == 1 && ctx.performed)
+        {
+            //active les essuie glasse
+            GameManager.Instance.WiperActivated = true;
+            UIManager.Instance.UpdateWiperUI();
+        }else
+        {
+            //désactive les essuie glasse
+            GameManager.Instance.WiperActivated = false;
+            UIManager.Instance.UpdateWiperUI();
+        }
+
+    }
 }

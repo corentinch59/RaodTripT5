@@ -47,8 +47,15 @@ public class GameManager : MonoBehaviour
         get { return _dischargingValue; }
         set { _dischargingValue = value; }
     }
+    public bool WiperActivated
+    {
+        get { return _wiperActivated; }
+        set { _wiperActivated = value; }
+    }
+    public IEvent Cerveau1 => _cerveau1;
+    public IEvent Cerveau2 => _cerveau2;
     #endregion
-    
+
     private bool isPlaying = true;
     private float _dynamoCharge = 0;
 
@@ -58,6 +65,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _chargingValue;
     [SerializeField] private float _dischargingValue;
 
+    [SerializeField]private bool _wiperActivated = false;
+    
+    private IEvent _cerveau1;
+    private IEvent _cerveau2;
+    
     public static GameEvent GameFinished;
     public static GameEvent DynamoFill;
 
@@ -83,6 +95,8 @@ public class GameManager : MonoBehaviour
         _dynamoCharge = _maxDynamoCharge;
 
         DynamoFill += UpdateGoalDistance;
+
+        NewEvent();
     }
 
     private void Update()
@@ -100,5 +114,10 @@ public class GameManager : MonoBehaviour
         {
             GoalDistance = Mathf.Clamp(GoalDistance -= Speed, 0, float.MaxValue);
         }
+    }
+    private void NewEvent()
+    {
+        _cerveau1 = EventManager.Instance.ChooseRandomEvent();
+        _cerveau1.BeginEvent();
     }
 }
