@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 {
     private Vector2 _previous;
 
+    
+
     public void Dynamo(InputAction.CallbackContext ctx)
     {
         Vector2 temp = ctx.ReadValue<Vector2>();
@@ -15,6 +17,11 @@ public class Player : MonoBehaviour
         if(angle > 0)
         {
             // Recharger la batterie
+
+            
+            GameManager.Instance.DynamoCharge = Mathf.Clamp(GameManager.Instance.DynamoCharge += GameManager.Instance.ChargingValue, 0, GameManager.Instance.MaxDynamoCharge);
+            
+
         }
         _previous = temp;
     }
