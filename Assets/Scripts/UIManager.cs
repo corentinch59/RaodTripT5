@@ -6,6 +6,8 @@ public class UIManager : MonoBehaviour
 {
     #region Properties
     public GameObject Dusts => _dusts;
+    public GameObject PhoneCallPopup => _phoneCallPopup;
+    public GameObject TrashOverloadPopup => _trashOverloadPopup;
     #endregion
 
     [SerializeField] private TextMeshProUGUI _goalDistanceText;
@@ -15,11 +17,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _dusts;
 
     [SerializeField]private GameObject _phoneCallPopup;
-    public GameObject PhoneCallPopup => _phoneCallPopup;
-
     [SerializeField] private GameObject _trashOverloadPopup;
-    public GameObject TrashOverloadPopup => _trashOverloadPopup;
-
+    
     private static UIManager _instance;
     public static UIManager Instance => _instance;
 

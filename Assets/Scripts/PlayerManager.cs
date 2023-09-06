@@ -37,7 +37,6 @@ public class PlayerManager : MonoBehaviour
             GameManager.Instance.WiperActivated = false;
             UIManager.Instance.UpdateWiperUI();
         }
-
     }
 
     public void DeclinePhone(InputAction.CallbackContext ctx)
@@ -46,7 +45,6 @@ public class PlayerManager : MonoBehaviour
         {
             GameManager.Instance.Cerveau1.CompleteEvent();
         }
-
     }
 
     public void LiberateTrash(InputAction.CallbackContext ctx)

@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
             GoalDistance = Mathf.Clamp(GoalDistance -= Speed, 0, float.MaxValue);
         }
     }
+
     private void NewEvent()
     {
         _cerveau1 = EventManager.Instance.ChooseRandomEvent();
