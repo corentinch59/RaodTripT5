@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
     private Vector2 _previous;
 
