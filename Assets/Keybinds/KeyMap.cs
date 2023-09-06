@@ -53,6 +53,24 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TrashOverload"",
+                    ""type"": ""Button"",
+                    ""id"": ""f9246ecd-90c4-4aff-a5b7-a1d5915d6fcd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AlarmClock"",
+                    ""type"": ""Button"",
+                    ""id"": ""32757295-9270-4dff-996a-6be3cdd21226"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -123,39 +141,6 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""d61758c2-1392-4a6d-bff1-ce628d91218f"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Wiper"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""04b976be-2770-4d16-9ed8-4e18e1733e6f"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Wiper"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""783954ea-dd2c-40f8-a68a-82d135dbf14e"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Wiper"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""right"",
                     ""id"": ""e7b6e2f2-311d-4599-bf52-958b854fcda3"",
                     ""path"": ""<Keyboard>/rightArrow"",
@@ -176,6 +161,28 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""action"": ""PhoneCall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55c0ee11-7d95-4f5b-a447-a61bdded744e"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TrashOverload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5c136e71-c1e7-4216-94f8-965d690d846e"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AlarmClock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -187,6 +194,8 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         m_PlayerControls_Dynamo = m_PlayerControls.FindAction("Dynamo", throwIfNotFound: true);
         m_PlayerControls_Wiper = m_PlayerControls.FindAction("Wiper", throwIfNotFound: true);
         m_PlayerControls_PhoneCall = m_PlayerControls.FindAction("PhoneCall", throwIfNotFound: true);
+        m_PlayerControls_TrashOverload = m_PlayerControls.FindAction("TrashOverload", throwIfNotFound: true);
+        m_PlayerControls_AlarmClock = m_PlayerControls.FindAction("AlarmClock", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -251,6 +260,8 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_Dynamo;
     private readonly InputAction m_PlayerControls_Wiper;
     private readonly InputAction m_PlayerControls_PhoneCall;
+    private readonly InputAction m_PlayerControls_TrashOverload;
+    private readonly InputAction m_PlayerControls_AlarmClock;
     public struct PlayerControlsActions
     {
         private @KeyMap m_Wrapper;
@@ -258,6 +269,8 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         public InputAction @Dynamo => m_Wrapper.m_PlayerControls_Dynamo;
         public InputAction @Wiper => m_Wrapper.m_PlayerControls_Wiper;
         public InputAction @PhoneCall => m_Wrapper.m_PlayerControls_PhoneCall;
+        public InputAction @TrashOverload => m_Wrapper.m_PlayerControls_TrashOverload;
+        public InputAction @AlarmClock => m_Wrapper.m_PlayerControls_AlarmClock;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -276,6 +289,12 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @PhoneCall.started += instance.OnPhoneCall;
             @PhoneCall.performed += instance.OnPhoneCall;
             @PhoneCall.canceled += instance.OnPhoneCall;
+            @TrashOverload.started += instance.OnTrashOverload;
+            @TrashOverload.performed += instance.OnTrashOverload;
+            @TrashOverload.canceled += instance.OnTrashOverload;
+            @AlarmClock.started += instance.OnAlarmClock;
+            @AlarmClock.performed += instance.OnAlarmClock;
+            @AlarmClock.canceled += instance.OnAlarmClock;
         }
 
         private void UnregisterCallbacks(IPlayerControlsActions instance)
@@ -289,6 +308,12 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @PhoneCall.started -= instance.OnPhoneCall;
             @PhoneCall.performed -= instance.OnPhoneCall;
             @PhoneCall.canceled -= instance.OnPhoneCall;
+            @TrashOverload.started -= instance.OnTrashOverload;
+            @TrashOverload.performed -= instance.OnTrashOverload;
+            @TrashOverload.canceled -= instance.OnTrashOverload;
+            @AlarmClock.started -= instance.OnAlarmClock;
+            @AlarmClock.performed -= instance.OnAlarmClock;
+            @AlarmClock.canceled -= instance.OnAlarmClock;
         }
 
         public void RemoveCallbacks(IPlayerControlsActions instance)
@@ -311,5 +336,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         void OnDynamo(InputAction.CallbackContext context);
         void OnWiper(InputAction.CallbackContext context);
         void OnPhoneCall(InputAction.CallbackContext context);
+        void OnTrashOverload(InputAction.CallbackContext context);
+        void OnAlarmClock(InputAction.CallbackContext context);
     }
 }
