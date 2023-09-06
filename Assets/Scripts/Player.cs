@@ -12,7 +12,10 @@ public class Player : MonoBehaviour
         Vector2 temp = ctx.ReadValue<Vector2>();
 
         float angle = Vector2.SignedAngle(temp, _previous);
-
+        if(angle > 0)
+        {
+            // Recharger la batterie
+        }
         _previous = temp;
     }
 }
