@@ -41,7 +41,7 @@ public class PlayerManager : MonoBehaviour
 
     public void DeclinePhone(InputAction.CallbackContext ctx)
     {
-        if(GameManager.Instance.Cerveau1 is PhoneCall)
+        if(ctx.started && GameManager.Instance.Cerveau1 is PhoneCall)
         {
             GameManager.Instance.Cerveau1.CompleteEvent();
         }
@@ -49,15 +49,15 @@ public class PlayerManager : MonoBehaviour
 
     public void LiberateTrash(InputAction.CallbackContext ctx)
     {
-        if (GameManager.Instance.Cerveau1 is TrashOverload)
+        if (ctx.started && GameManager.Instance.Cerveau1 is TrashOverload)
         {
             GameManager.Instance.Cerveau1.CompleteEvent();
         }
     }
 
-    public void TurnOffAlarmClock()
+    public void TurnOffAlarmClock(InputAction.CallbackContext ctx)
     {
-        if(GameManager.Instance.Cerveau1 is AlarmClock)
+        if(ctx.started && GameManager.Instance.Cerveau1 is AlarmClock)
         {
             GameManager.Instance.Cerveau1.CompleteEvent();
         }

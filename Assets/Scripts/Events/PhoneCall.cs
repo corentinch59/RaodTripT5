@@ -14,6 +14,7 @@ public class PhoneCall : IEvent
     {
         Debug.Log("Phone Call Completed");
         UIManager.Instance.PhoneCallPopup.SetActive(false);
+        GameManager.Instance.BetweenEvents();
     }
 
     public void FailedEvent()

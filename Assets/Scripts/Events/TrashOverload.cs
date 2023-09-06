@@ -14,6 +14,7 @@ public class TrashOverload : IEvent
     {
         Debug.Log("Trash Overload Completed");
         UIManager.Instance.TrashOverloadPopup.SetActive(false);
+        GameManager.Instance.BetweenEvents();
     }
 
     public void FailedEvent()
