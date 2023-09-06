@@ -17,6 +17,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]private GameObject _phoneCallPopup;
     public GameObject PhoneCallPopup => _phoneCallPopup;
 
+    [SerializeField] private GameObject _trashOverloadPopup;
+    public GameObject TrashOverloadPopup => _trashOverloadPopup;
+
     private static UIManager _instance;
     public static UIManager Instance => _instance;
 
@@ -55,10 +58,6 @@ public class UIManager : MonoBehaviour
         if (GameManager.Instance.WiperActivated)
         {
             _wiperImage.color = Color.green;
-            if (GameManager.Instance.Cerveau1 is DustCloud)
-            {
-                GameManager.Instance.Cerveau1.CompleteEvent();
-            }  
         }
         else
         {

@@ -21,11 +21,16 @@ public class PlayerManager : MonoBehaviour
     {
         Vector2 temp = ctx.ReadValue<Vector2>();
 
-        if(temp.x == 1 && ctx.performed)
+        if(temp.x == 1)
         {
             //active les essuie glasse
             GameManager.Instance.WiperActivated = true;
             UIManager.Instance.UpdateWiperUI();
+
+            if (ctx.performed && GameManager.Instance.Cerveau1 is DustCloud)
+            {
+                GameManager.Instance.Cerveau1.CompleteEvent();
+            }
         }else
         {
             //désactive les essuie glasse
@@ -42,6 +47,22 @@ public class PlayerManager : MonoBehaviour
             GameManager.Instance.Cerveau1.CompleteEvent();
         }
 
+    }
+
+    public void LiberateTrash(InputAction.CallbackContext ctx)
+    {
+        if (GameManager.Instance.Cerveau1 is TrashOverload)
+        {
+            GameManager.Instance.Cerveau1.CompleteEvent();
+        }
+    }
+
+    public void TurnOffAlarmClock()
+    {
+        if(GameManager.Instance.Cerveau1 is AlarmClock)
+        {
+            GameManager.Instance.Cerveau1.CompleteEvent();
+        }
     }
 
 }
