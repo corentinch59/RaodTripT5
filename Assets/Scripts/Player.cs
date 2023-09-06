@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
     private Vector2 _previous;
-
-    
 
     public void Dynamo(InputAction.CallbackContext ctx)
     {
@@ -16,12 +12,7 @@ public class Player : MonoBehaviour
         float angle = Vector2.SignedAngle(temp, _previous);
         if(angle > 0)
         {
-            // Recharger la batterie
-
-            
             GameManager.Instance.DynamoCharge = Mathf.Clamp(GameManager.Instance.DynamoCharge += GameManager.Instance.ChargingValue, 0, GameManager.Instance.MaxDynamoCharge);
-            
-
         }
         _previous = temp;
     }

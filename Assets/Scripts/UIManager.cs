@@ -1,15 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
 {
 
-    public TextMeshProUGUI _goalDistanceText;
-    public Slider _dynamoFillSlider;
-
+    [SerializeField] private TextMeshProUGUI _goalDistanceText;
+    [SerializeField] private Material dynamoMat;
 
     private static UIManager _instance;
     public static UIManager Instance => _instance;
@@ -31,21 +27,15 @@ public class UIManager : MonoBehaviour
     {
         GameManager.DynamoFill += UpdateDynamoFillUI;
         GameManager.DynamoFill += UpdateGoalDistanceUI;
-
     }
 
     public void UpdateDynamoFillUI()
     {
-
-        _dynamoFillSlider.value = GameManager.Instance.DynamoCharge / GameManager.Instance.MaxDynamoCharge ;
-
+        dynamoMat.SetFloat("_Battery", GameManager.Instance.DynamoCharge / GameManager.Instance.MaxDynamoCharge);
     }
 
     public void UpdateGoalDistanceUI()
     {
-
         _goalDistanceText.text = GameManager.Instance.GoalDistance.ToString() + " m";
-
     }
-
 }
