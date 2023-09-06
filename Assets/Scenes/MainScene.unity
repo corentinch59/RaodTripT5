@@ -580,8 +580,8 @@ MonoBehaviour:
   _goalDistance: 1000
   _speed: 0.1
   _maxDynamoCharge: 10
-  _chargingValue: 1
-  _dischargingValue: 0.1
+  _chargingValue: 0.3
+  _dischargingValue: 0.05
 --- !u!4 &1227416515
 Transform:
   m_ObjectHideFlags: 0
