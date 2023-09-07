@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TrashOverload : IEvent
@@ -14,7 +12,6 @@ public class TrashOverload : IEvent
     {
         Debug.Log("Trash Overload Completed");
         UIManager.Instance.TrashOverloadPopup.SetActive(false);
-        GameManager.Instance.BetweenEvents();
     }
 
     public void FailedEvent()

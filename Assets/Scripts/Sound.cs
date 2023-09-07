@@ -18,7 +18,7 @@ public class Sound
     }
     #endregion
 
-    [SerializeField] private string _name;
+    [SerializeField] private string _name = "New Sound";
     [SerializeField] private AudioClip _clip;
     [SerializeField] private AudioMixerGroup _output;
     [SerializeField] private bool _loop;

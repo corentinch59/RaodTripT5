@@ -53,8 +53,8 @@ public class GameManager : MonoBehaviour
         get { return _wiperActivated; }
         set { _wiperActivated = value; }
     }
-    public IEvent Cerveau1 => _cerveau1;
-    public IEvent Cerveau2 => _cerveau2;
+    public Cerveau Cerveau1 => _cerveau1;
+    public Cerveau Cerveau2 => _cerveau2;
     #endregion
 
     private bool isPlaying = true;
@@ -67,11 +67,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _dischargingValue;
 
     private bool _wiperActivated = false;
-    
-    private IEvent _cerveau1;
-    private IEvent _cerveau2;
+
+    private Cerveau _cerveau1;
+    private Cerveau _cerveau2;
+    public Cerveau[] cerveaux = new Cerveau[2];
 
     [SerializeField] private float _timeBetweenEvents;
+    [SerializeField] private float _timeBetweenEvents2;
     
     public static GameEvent GameFinished;
     public static GameEvent DynamoFill;
@@ -94,12 +96,21 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _cerveau1 = gameObject.AddComponent<Cerveau>();
+        _cerveau1.Timer = _timeBetweenEvents;
+        _cerveau2 = gameObject.AddComponent<Cerveau>();
+        _cerveau2.Timer = _timeBetweenEvents2;
+
+        cerveaux[0] = _cerveau1;
+        cerveaux[1] = _cerveau2;
+        
         GameFinished += () => { Debug.Log("GameFinished"); };
         _dynamoCharge = _maxDynamoCharge;
 
         DynamoFill += UpdateGoalDistance;
 
-        NewEvent();
+        NewBrainCycle(Cerveau1);
+        NewBrainCycle(Cerveau2);
 
         AudioManager.Instance.PlaySound("TestSound");
     }
@@ -121,23 +132,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void NewEvent()
+    public void NewBrainCycle(Cerveau cerveau)
     {
-        _cerveau1 = EventManager.Instance.ChooseRandomEvent();
-        _cerveau1.BeginEvent();
+        IEvent tempEvent = EventManager.Instance.ChooseRandomEvent();
+        foreach(Cerveau cerv in cerveaux)
+        {
+            if(cerv != cerveau)
+            {
+                if(tempEvent == cerv.EventCerv)
+                {
+                    NewBrainCycle(cerveau);
+                }
+                else
+                {
+                    cerveau.EventCerv = tempEvent;
+                    cerveau.EventCerv.BeginEvent();
+                }
+            }
+        }
     }
-
-    public void BetweenEvents()
-    {
-        StartCoroutine(BetweenEventsCoroutine());
-    }
-
-    private IEnumerator BetweenEventsCoroutine()
-    {
-        Debug.Log("Start Between Event");
-        yield return new WaitForSeconds(_timeBetweenEvents);
-        Debug.Log("End Between Event");
-        NewEvent();
-    }
-
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DustCloud : IEvent
@@ -14,7 +12,6 @@ public class DustCloud : IEvent
     {
         Debug.Log("Dust Completed");
         UIManager.Instance.Dusts.SetActive(false);
-        GameManager.Instance.BetweenEvents();
     }
 
     public void FailedEvent()
