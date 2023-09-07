@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DynamoMaterial
+  m_Name: OxygenMaterial
   m_Shader: {fileID: 4800000, guid: 066d73976dad7c14eb55a2cd7a48dad0, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -83,7 +83,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Battery: 0.48
+    - _Battery: 0.585
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
