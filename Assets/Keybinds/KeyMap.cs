@@ -37,22 +37,40 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""RightJoystick"",
+                    ""name"": ""Wiper"",
                     ""type"": ""Value"",
-                    ""id"": ""8dee6fd8-333b-463e-a418-233f521e00f2"",
+                    ""id"": ""32884280-6bdd-4ee7-890e-78e4e632fece"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(duration=1)"",
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""LeftJoystick"",
-                    ""type"": ""Value"",
-                    ""id"": ""89613e69-05cf-430f-ab26-a8045ea1b30b"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""name"": ""PhoneCall"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d1d7e2c-a19b-4623-9b5e-c193a5f34bb6"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TrashOverload"",
+                    ""type"": ""Button"",
+                    ""id"": ""f9246ecd-90c4-4aff-a5b7-a1d5915d6fcd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AlarmClock"",
+                    ""type"": ""Button"",
+                    ""id"": ""32757295-9270-4dff-996a-6be3cdd21226"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -113,69 +131,58 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""2D Vector"",
-                    ""id"": ""5dc46335-c9a6-48dd-825c-a68730074795"",
+                    ""id"": ""78fe7823-dd4e-4e89-98ba-4fd887e9a05e"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RightJoystick"",
+                    ""action"": ""Wiper"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""4288b6a9-fdb1-43d6-916d-ecda4c278cea"",
+                    ""name"": ""right"",
+                    ""id"": ""e7b6e2f2-311d-4599-bf52-958b854fcda3"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Wiper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a8fa9d6-3575-449e-9307-0c50aee5533c"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PhoneCall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55c0ee11-7d95-4f5b-a447-a61bdded744e"",
                     ""path"": ""<Keyboard>/t"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RightJoystick"",
+                    ""action"": ""TrashOverload"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""1013c0b3-0342-4d10-9471-fab8784881e5"",
-                    ""path"": ""<Keyboard>/g"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""RightJoystick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""2a855166-63f2-4773-8648-ab7042e58a6b"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LeftJoystick"",
-                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""966e5e0f-4b7b-4a1f-a9f2-dcba39f7b2cb"",
-                    ""path"": ""<Keyboard>/i"",
+                    ""name"": """",
+                    ""id"": ""5c136e71-c1e7-4216-94f8-965d690d846e"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LeftJoystick"",
+                    ""action"": ""AlarmClock"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""08633f2f-32a1-4feb-ac00-9a51575f16e5"",
-                    ""path"": ""<Keyboard>/k"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LeftJoystick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,8 +192,10 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         // PlayerControls
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
         m_PlayerControls_Dynamo = m_PlayerControls.FindAction("Dynamo", throwIfNotFound: true);
-        m_PlayerControls_RightJoystick = m_PlayerControls.FindAction("RightJoystick", throwIfNotFound: true);
-        m_PlayerControls_LeftJoystick = m_PlayerControls.FindAction("LeftJoystick", throwIfNotFound: true);
+        m_PlayerControls_Wiper = m_PlayerControls.FindAction("Wiper", throwIfNotFound: true);
+        m_PlayerControls_PhoneCall = m_PlayerControls.FindAction("PhoneCall", throwIfNotFound: true);
+        m_PlayerControls_TrashOverload = m_PlayerControls.FindAction("TrashOverload", throwIfNotFound: true);
+        m_PlayerControls_AlarmClock = m_PlayerControls.FindAction("AlarmClock", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -249,15 +258,19 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerControls;
     private List<IPlayerControlsActions> m_PlayerControlsActionsCallbackInterfaces = new List<IPlayerControlsActions>();
     private readonly InputAction m_PlayerControls_Dynamo;
-    private readonly InputAction m_PlayerControls_RightJoystick;
-    private readonly InputAction m_PlayerControls_LeftJoystick;
+    private readonly InputAction m_PlayerControls_Wiper;
+    private readonly InputAction m_PlayerControls_PhoneCall;
+    private readonly InputAction m_PlayerControls_TrashOverload;
+    private readonly InputAction m_PlayerControls_AlarmClock;
     public struct PlayerControlsActions
     {
         private @KeyMap m_Wrapper;
         public PlayerControlsActions(@KeyMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Dynamo => m_Wrapper.m_PlayerControls_Dynamo;
-        public InputAction @RightJoystick => m_Wrapper.m_PlayerControls_RightJoystick;
-        public InputAction @LeftJoystick => m_Wrapper.m_PlayerControls_LeftJoystick;
+        public InputAction @Wiper => m_Wrapper.m_PlayerControls_Wiper;
+        public InputAction @PhoneCall => m_Wrapper.m_PlayerControls_PhoneCall;
+        public InputAction @TrashOverload => m_Wrapper.m_PlayerControls_TrashOverload;
+        public InputAction @AlarmClock => m_Wrapper.m_PlayerControls_AlarmClock;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -270,12 +283,18 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @Dynamo.started += instance.OnDynamo;
             @Dynamo.performed += instance.OnDynamo;
             @Dynamo.canceled += instance.OnDynamo;
-            @RightJoystick.started += instance.OnRightJoystick;
-            @RightJoystick.performed += instance.OnRightJoystick;
-            @RightJoystick.canceled += instance.OnRightJoystick;
-            @LeftJoystick.started += instance.OnLeftJoystick;
-            @LeftJoystick.performed += instance.OnLeftJoystick;
-            @LeftJoystick.canceled += instance.OnLeftJoystick;
+            @Wiper.started += instance.OnWiper;
+            @Wiper.performed += instance.OnWiper;
+            @Wiper.canceled += instance.OnWiper;
+            @PhoneCall.started += instance.OnPhoneCall;
+            @PhoneCall.performed += instance.OnPhoneCall;
+            @PhoneCall.canceled += instance.OnPhoneCall;
+            @TrashOverload.started += instance.OnTrashOverload;
+            @TrashOverload.performed += instance.OnTrashOverload;
+            @TrashOverload.canceled += instance.OnTrashOverload;
+            @AlarmClock.started += instance.OnAlarmClock;
+            @AlarmClock.performed += instance.OnAlarmClock;
+            @AlarmClock.canceled += instance.OnAlarmClock;
         }
 
         private void UnregisterCallbacks(IPlayerControlsActions instance)
@@ -283,12 +302,18 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @Dynamo.started -= instance.OnDynamo;
             @Dynamo.performed -= instance.OnDynamo;
             @Dynamo.canceled -= instance.OnDynamo;
-            @RightJoystick.started -= instance.OnRightJoystick;
-            @RightJoystick.performed -= instance.OnRightJoystick;
-            @RightJoystick.canceled -= instance.OnRightJoystick;
-            @LeftJoystick.started -= instance.OnLeftJoystick;
-            @LeftJoystick.performed -= instance.OnLeftJoystick;
-            @LeftJoystick.canceled -= instance.OnLeftJoystick;
+            @Wiper.started -= instance.OnWiper;
+            @Wiper.performed -= instance.OnWiper;
+            @Wiper.canceled -= instance.OnWiper;
+            @PhoneCall.started -= instance.OnPhoneCall;
+            @PhoneCall.performed -= instance.OnPhoneCall;
+            @PhoneCall.canceled -= instance.OnPhoneCall;
+            @TrashOverload.started -= instance.OnTrashOverload;
+            @TrashOverload.performed -= instance.OnTrashOverload;
+            @TrashOverload.canceled -= instance.OnTrashOverload;
+            @AlarmClock.started -= instance.OnAlarmClock;
+            @AlarmClock.performed -= instance.OnAlarmClock;
+            @AlarmClock.canceled -= instance.OnAlarmClock;
         }
 
         public void RemoveCallbacks(IPlayerControlsActions instance)
@@ -309,7 +334,9 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     public interface IPlayerControlsActions
     {
         void OnDynamo(InputAction.CallbackContext context);
-        void OnRightJoystick(InputAction.CallbackContext context);
-        void OnLeftJoystick(InputAction.CallbackContext context);
+        void OnWiper(InputAction.CallbackContext context);
+        void OnPhoneCall(InputAction.CallbackContext context);
+        void OnTrashOverload(InputAction.CallbackContext context);
+        void OnAlarmClock(InputAction.CallbackContext context);
     }
 }

@@ -90,4 +90,50 @@ public class PlayerManager : MonoBehaviour
             _rb.velocity = new Vector3(0.0f, _navigationSpeed * Time.deltaTime, 0.0f);
         }
     }
+
+    public void Wiper(InputAction.CallbackContext ctx)
+    {
+        Vector2 temp = ctx.ReadValue<Vector2>();
+
+        if(temp.x == 1)
+        {
+            //active les essuie glasse
+            GameManager.Instance.WiperActivated = true;
+            UIManager.Instance.UpdateWiperUI();
+
+            if (ctx.performed && GameManager.Instance.Cerveau1 is DustCloud)
+            {
+                GameManager.Instance.Cerveau1.CompleteEvent();
+            }
+        }else
+        {
+            //d�sactive les essuie glasse
+            GameManager.Instance.WiperActivated = false;
+            UIManager.Instance.UpdateWiperUI();
+        }
+    }
+
+    public void DeclinePhone(InputAction.CallbackContext ctx)
+    {
+        if(ctx.started && GameManager.Instance.Cerveau1 is PhoneCall)
+        {
+            GameManager.Instance.Cerveau1.CompleteEvent();
+        }
+    }
+
+    public void LiberateTrash(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started && GameManager.Instance.Cerveau1 is TrashOverload)
+        {
+            GameManager.Instance.Cerveau1.CompleteEvent();
+        }
+    }
+
+    public void TurnOffAlarmClock(InputAction.CallbackContext ctx)
+    {
+        if(ctx.started && GameManager.Instance.Cerveau1 is AlarmClock)
+        {
+            GameManager.Instance.Cerveau1.CompleteEvent();
+        }
+    }
 }
