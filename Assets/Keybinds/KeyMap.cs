@@ -71,6 +71,24 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftJoystick"",
+                    ""type"": ""Value"",
+                    ""id"": ""7d2e2fa3-ad8d-4587-ab11-34de36a62f6c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RightJoystick"",
+                    ""type"": ""Value"",
+                    ""id"": ""8298a004-c1f3-41dd-b5db-edb4de6c5c60"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -183,6 +201,72 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""action"": ""AlarmClock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""0c4bb666-a333-43d3-b593-dd095701d4a8"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftJoystick"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""c2374b94-4030-43ca-b459-0d6ef8be3ec1"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftJoystick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""04fbdaa5-b224-4731-b564-87b4d4a984a2"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftJoystick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""6c861d4a-45f9-4bbb-a8c0-909824c8bdac"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightJoystick"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""6cbd7585-c2cd-4e20-8bf0-4ee1b8b9e1af"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightJoystick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""76b42ccf-1ecc-436e-bb23-4a045be1044a"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightJoystick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -196,6 +280,8 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         m_PlayerControls_PhoneCall = m_PlayerControls.FindAction("PhoneCall", throwIfNotFound: true);
         m_PlayerControls_TrashOverload = m_PlayerControls.FindAction("TrashOverload", throwIfNotFound: true);
         m_PlayerControls_AlarmClock = m_PlayerControls.FindAction("AlarmClock", throwIfNotFound: true);
+        m_PlayerControls_LeftJoystick = m_PlayerControls.FindAction("LeftJoystick", throwIfNotFound: true);
+        m_PlayerControls_RightJoystick = m_PlayerControls.FindAction("RightJoystick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -262,6 +348,8 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_PhoneCall;
     private readonly InputAction m_PlayerControls_TrashOverload;
     private readonly InputAction m_PlayerControls_AlarmClock;
+    private readonly InputAction m_PlayerControls_LeftJoystick;
+    private readonly InputAction m_PlayerControls_RightJoystick;
     public struct PlayerControlsActions
     {
         private @KeyMap m_Wrapper;
@@ -271,6 +359,8 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         public InputAction @PhoneCall => m_Wrapper.m_PlayerControls_PhoneCall;
         public InputAction @TrashOverload => m_Wrapper.m_PlayerControls_TrashOverload;
         public InputAction @AlarmClock => m_Wrapper.m_PlayerControls_AlarmClock;
+        public InputAction @LeftJoystick => m_Wrapper.m_PlayerControls_LeftJoystick;
+        public InputAction @RightJoystick => m_Wrapper.m_PlayerControls_RightJoystick;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -295,6 +385,12 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @AlarmClock.started += instance.OnAlarmClock;
             @AlarmClock.performed += instance.OnAlarmClock;
             @AlarmClock.canceled += instance.OnAlarmClock;
+            @LeftJoystick.started += instance.OnLeftJoystick;
+            @LeftJoystick.performed += instance.OnLeftJoystick;
+            @LeftJoystick.canceled += instance.OnLeftJoystick;
+            @RightJoystick.started += instance.OnRightJoystick;
+            @RightJoystick.performed += instance.OnRightJoystick;
+            @RightJoystick.canceled += instance.OnRightJoystick;
         }
 
         private void UnregisterCallbacks(IPlayerControlsActions instance)
@@ -314,6 +410,12 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @AlarmClock.started -= instance.OnAlarmClock;
             @AlarmClock.performed -= instance.OnAlarmClock;
             @AlarmClock.canceled -= instance.OnAlarmClock;
+            @LeftJoystick.started -= instance.OnLeftJoystick;
+            @LeftJoystick.performed -= instance.OnLeftJoystick;
+            @LeftJoystick.canceled -= instance.OnLeftJoystick;
+            @RightJoystick.started -= instance.OnRightJoystick;
+            @RightJoystick.performed -= instance.OnRightJoystick;
+            @RightJoystick.canceled -= instance.OnRightJoystick;
         }
 
         public void RemoveCallbacks(IPlayerControlsActions instance)
@@ -338,5 +440,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         void OnPhoneCall(InputAction.CallbackContext context);
         void OnTrashOverload(InputAction.CallbackContext context);
         void OnAlarmClock(InputAction.CallbackContext context);
+        void OnLeftJoystick(InputAction.CallbackContext context);
+        void OnRightJoystick(InputAction.CallbackContext context);
     }
 }
