@@ -91,6 +91,37 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void OnOxygenButton1(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            if((GameManager.Instance.OxygenRatio >= 0.25f && GameManager.Instance.OxygenRatio < 0.5f) || (GameManager.Instance.OxygenRatio >= 0.75f && GameManager.Instance.OxygenRatio < 1.0f))
+            {
+                GameManager.Instance.OxygenButton1Pressed = true;
+                GameManager.Instance.StartFillOxygen();
+            }
+        }else if (ctx.canceled)
+        {
+            GameManager.Instance.OxygenButton1Pressed = false;
+        }
+    }
+
+    public void OnOxygenButton2(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            if ((GameManager.Instance.OxygenRatio >= 0.0f && GameManager.Instance.OxygenRatio < 0.25f) || (GameManager.Instance.OxygenRatio >= 0.50f && GameManager.Instance.OxygenRatio < 0.75f))
+            {
+                GameManager.Instance.OxygenButton2Pressed = true;
+                GameManager.Instance.StartFillOxygen();
+            }
+        }
+        else if (ctx.canceled)
+        {
+            GameManager.Instance.OxygenButton2Pressed = false;
+        }
+    }
+
     public void Wiper(InputAction.CallbackContext ctx)
     {
         Vector2 temp = ctx.ReadValue<Vector2>();

@@ -16,8 +16,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image _wiperImage;
     [SerializeField] private GameObject _dusts;
 
-    [SerializeField]private GameObject _phoneCallPopup;
+    [SerializeField] private GameObject _phoneCallPopup;
     [SerializeField] private GameObject _trashOverloadPopup;
+
+    [SerializeField] private Slider _oxygenSlider;
     
     private static UIManager _instance;
     public static UIManager Instance => _instance;
@@ -39,6 +41,7 @@ public class UIManager : MonoBehaviour
     {
         GameManager.DynamoFill += UpdateDynamoFillUI;
         GameManager.DynamoFill += UpdateGoalDistanceUI;
+        GameManager.OxygenFill += UpdateOxygenFillUI;
     }
 
     public void UpdateDynamoFillUI()
@@ -49,6 +52,11 @@ public class UIManager : MonoBehaviour
     public void UpdateGoalDistanceUI()
     {
         _goalDistanceText.text = GameManager.Instance.GoalDistance.ToString() + " m";
+    }
+
+    public void UpdateOxygenFillUI()
+    {
+        _oxygenSlider.value = GameManager.Instance.OxygenRatio;
     }
 
     public void UpdateWiperUI()
