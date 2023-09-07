@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PhoneCall : IEvent
@@ -14,7 +12,6 @@ public class PhoneCall : IEvent
     {
         Debug.Log("Phone Call Completed");
         UIManager.Instance.PhoneCallPopup.SetActive(false);
-        GameManager.Instance.BetweenEvents();
     }
 
     public void FailedEvent()
