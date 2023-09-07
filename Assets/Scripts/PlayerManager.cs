@@ -68,12 +68,12 @@ public class PlayerManager : MonoBehaviour
         if (leftDirection.y > 0)
         {
             // Right
-            _rb.velocity = new Vector3(-_navigationSpeed * Time.fixedDeltaTime, 0.0f, 0.0f);
+            _rb.velocity = new Vector3(_navigationSpeed * Time.fixedDeltaTime, 0.0f, 0.0f);
         }
         else
         {
             // Left
-            _rb.velocity = new Vector3(_navigationSpeed * Time.fixedDeltaTime, 0.0f, 0.0f);
+            _rb.velocity = new Vector3(-_navigationSpeed * Time.fixedDeltaTime, 0.0f, 0.0f);
         }
     }
 
