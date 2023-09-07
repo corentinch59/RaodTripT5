@@ -35,6 +35,24 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RightJoystick"",
+                    ""type"": ""Value"",
+                    ""id"": ""8dee6fd8-333b-463e-a418-233f521e00f2"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LeftJoystick"",
+                    ""type"": ""Value"",
+                    ""id"": ""89613e69-05cf-430f-ab26-a8045ea1b30b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -92,6 +110,72 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""action"": ""Dynamo"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""5dc46335-c9a6-48dd-825c-a68730074795"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightJoystick"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""4288b6a9-fdb1-43d6-916d-ecda4c278cea"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightJoystick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""1013c0b3-0342-4d10-9471-fab8784881e5"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightJoystick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""2a855166-63f2-4773-8648-ab7042e58a6b"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftJoystick"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""966e5e0f-4b7b-4a1f-a9f2-dcba39f7b2cb"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftJoystick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""08633f2f-32a1-4feb-ac00-9a51575f16e5"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftJoystick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -101,6 +185,8 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         // PlayerControls
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
         m_PlayerControls_Dynamo = m_PlayerControls.FindAction("Dynamo", throwIfNotFound: true);
+        m_PlayerControls_RightJoystick = m_PlayerControls.FindAction("RightJoystick", throwIfNotFound: true);
+        m_PlayerControls_LeftJoystick = m_PlayerControls.FindAction("LeftJoystick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -163,11 +249,15 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerControls;
     private List<IPlayerControlsActions> m_PlayerControlsActionsCallbackInterfaces = new List<IPlayerControlsActions>();
     private readonly InputAction m_PlayerControls_Dynamo;
+    private readonly InputAction m_PlayerControls_RightJoystick;
+    private readonly InputAction m_PlayerControls_LeftJoystick;
     public struct PlayerControlsActions
     {
         private @KeyMap m_Wrapper;
         public PlayerControlsActions(@KeyMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Dynamo => m_Wrapper.m_PlayerControls_Dynamo;
+        public InputAction @RightJoystick => m_Wrapper.m_PlayerControls_RightJoystick;
+        public InputAction @LeftJoystick => m_Wrapper.m_PlayerControls_LeftJoystick;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -180,6 +270,12 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @Dynamo.started += instance.OnDynamo;
             @Dynamo.performed += instance.OnDynamo;
             @Dynamo.canceled += instance.OnDynamo;
+            @RightJoystick.started += instance.OnRightJoystick;
+            @RightJoystick.performed += instance.OnRightJoystick;
+            @RightJoystick.canceled += instance.OnRightJoystick;
+            @LeftJoystick.started += instance.OnLeftJoystick;
+            @LeftJoystick.performed += instance.OnLeftJoystick;
+            @LeftJoystick.canceled += instance.OnLeftJoystick;
         }
 
         private void UnregisterCallbacks(IPlayerControlsActions instance)
@@ -187,6 +283,12 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @Dynamo.started -= instance.OnDynamo;
             @Dynamo.performed -= instance.OnDynamo;
             @Dynamo.canceled -= instance.OnDynamo;
+            @RightJoystick.started -= instance.OnRightJoystick;
+            @RightJoystick.performed -= instance.OnRightJoystick;
+            @RightJoystick.canceled -= instance.OnRightJoystick;
+            @LeftJoystick.started -= instance.OnLeftJoystick;
+            @LeftJoystick.performed -= instance.OnLeftJoystick;
+            @LeftJoystick.canceled -= instance.OnLeftJoystick;
         }
 
         public void RemoveCallbacks(IPlayerControlsActions instance)
@@ -207,5 +309,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     public interface IPlayerControlsActions
     {
         void OnDynamo(InputAction.CallbackContext context);
+        void OnRightJoystick(InputAction.CallbackContext context);
+        void OnLeftJoystick(InputAction.CallbackContext context);
     }
 }
