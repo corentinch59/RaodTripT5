@@ -53,8 +53,6 @@ public class GameManager : MonoBehaviour
         get { return _wiperActivated; }
         set { _wiperActivated = value; }
     }
-    public Cerveau Cerveau1 => _cerveau1;
-    public Cerveau Cerveau2 => _cerveau2;
     #endregion
 
     private bool isPlaying = true;
@@ -106,7 +104,6 @@ public class GameManager : MonoBehaviour
 
     private Cerveau _cerveau1;
     private Cerveau _cerveau2;
-    public Cerveau[] cerveaux = new Cerveau[2];
 
     [SerializeField] private float _timeBetweenEvents;
     [SerializeField] private float _timeBetweenEvents2;
@@ -134,12 +131,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _cerveau1 = gameObject.AddComponent<Cerveau>();
-        _cerveau1.Timer = _timeBetweenEvents;
+        _cerveau1.InitCerv(_timeBetweenEvents);
         _cerveau2 = gameObject.AddComponent<Cerveau>();
-        _cerveau2.Timer = _timeBetweenEvents2;
-
-        cerveaux[0] = _cerveau1;
-        cerveaux[1] = _cerveau2;
+        _cerveau2.InitCerv(_timeBetweenEvents2);
         
         GameFinished += () => { Debug.Log("GameFinished"); };
 
@@ -148,8 +142,8 @@ public class GameManager : MonoBehaviour
 
         OxygenCharge = _maxOxygenCharge;
 
-        NewBrainCycle(Cerveau1);
-        NewBrainCycle(Cerveau2);
+        Cerveau.NewBrainCycle(_cerveau1);
+        Cerveau.NewBrainCycle(_cerveau2);
     }
 
     private void Update()
@@ -166,26 +160,6 @@ public class GameManager : MonoBehaviour
         if(_dynamoCharge > 0)
         {
             GoalDistance = Mathf.Clamp(GoalDistance -= Speed, 0, float.MaxValue);
-        }
-    }
-
-    public void NewBrainCycle(Cerveau cerveau)
-    {
-        IEvent tempEvent = EventManager.Instance.ChooseRandomEvent();
-        foreach(Cerveau cerv in cerveaux)
-        {
-            if(cerv != cerveau)
-            {
-                if(tempEvent == cerv.EventCerv)
-                {
-                    NewBrainCycle(cerveau);
-                }
-                else
-                {
-                    cerveau.EventCerv = tempEvent;
-                    cerveau.EventCerv.BeginEvent();
-                }
-            }
         }
     }
 
@@ -250,7 +224,7 @@ public class GameManager : MonoBehaviour
             }
 
         }
-        foreach (Cerveau cerveau in cerveaux)
+        foreach (Cerveau cerveau in Cerveau.cerveaux)
         {
             if (cerveau.EventCerv is Oxygen)
             {

@@ -132,7 +132,7 @@ public class PlayerManager : MonoBehaviour
             GameManager.Instance.WiperActivated = true;
             UIManager.Instance.UpdateWiperUI();
 
-            foreach (Cerveau cerveau in GameManager.Instance.cerveaux)
+            foreach (Cerveau cerveau in Cerveau.cerveaux)
             {
                 if (ctx.performed && cerveau.EventCerv is DustCloud)
                 {
@@ -150,7 +150,7 @@ public class PlayerManager : MonoBehaviour
 
     public void DeclinePhone(InputAction.CallbackContext ctx)
     {
-        foreach(Cerveau cerveau in GameManager.Instance.cerveaux)
+        foreach(Cerveau cerveau in Cerveau.cerveaux)
         {
             if (ctx.started && cerveau.EventCerv is PhoneCall)
             {
@@ -162,7 +162,7 @@ public class PlayerManager : MonoBehaviour
 
     public void LiberateTrash(InputAction.CallbackContext ctx)
     {
-        foreach (Cerveau cerveau in GameManager.Instance.cerveaux)
+        foreach (Cerveau cerveau in Cerveau.cerveaux)
         {
             if (ctx.started && cerveau.EventCerv is TrashOverload)
             {
@@ -173,7 +173,7 @@ public class PlayerManager : MonoBehaviour
 
     public void TurnOffAlarmClock(InputAction.CallbackContext ctx)
     {
-        foreach (Cerveau cerveau in GameManager.Instance.cerveaux)
+        foreach (Cerveau cerveau in Cerveau.cerveaux)
         {
             if (ctx.started && cerveau.EventCerv is AlarmClock)
             {

@@ -2006,10 +2006,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1afff27d07e15274c877640456385d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _goalDistance: 1000
+  _goalDistance: 10000
   _speed: 0.1
   _maxDynamoCharge: 1000
-  _chargingValue: 1
+  _chargingValue: 10
   _dischargingValue: 0.1
   _maxOxygenCharge: 24
   _oxygenFillingAmount: 1
@@ -2018,9 +2018,6 @@ MonoBehaviour:
   _oxygenLoosingAmount: 1
   _oxygenLoosingSpeed: 1
   _oxygenEventDuration: 10
-  cerveaux:
-  - {fileID: 0}
-  - {fileID: 0}
   _timeBetweenEvents: 3
   _timeBetweenEvents2: 6
 --- !u!4 &1227416515
