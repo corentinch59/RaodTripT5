@@ -1397,13 +1397,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9355c74eff3c2f84ab8164f7eff241a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - _name: TestSound
-    _clip: {fileID: 8300000, guid: a6e8a1824361fce408e0a4eb7fb61fe1, type: 3}
-    _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
-    _loop: 0
-    _volume: 1
-    _pitch: 1
+  _sounds: []
+  _audioMixer: {fileID: 0}
 --- !u!82 &454016124
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2010,7 +2005,11 @@ MonoBehaviour:
   _maxDynamoCharge: 10
   _chargingValue: 1
   _dischargingValue: 0.1
+  cerveaux:
+  - {fileID: 0}
+  - {fileID: 0}
   _timeBetweenEvents: 3
+  _timeBetweenEvents2: 6
 --- !u!4 &1227416515
 Transform:
   m_ObjectHideFlags: 0

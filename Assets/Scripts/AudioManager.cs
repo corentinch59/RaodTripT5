@@ -53,7 +53,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(tempSound.Name + "doesn't exist");
+            Debug.Log(name + "doesn't exist");
         }
     }
 
