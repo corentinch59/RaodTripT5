@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
     private Vector2 leftDirection;
     private Vector2 rightDirection;
 
-    private void Update()
+    private void FixedUpdate()
     {
         EvaluateDirection(leftDirection, rightDirection);
     }
@@ -68,12 +68,12 @@ public class PlayerManager : MonoBehaviour
         if (leftDirection.y > 0)
         {
             // Right
-            _rb.velocity = new Vector3(-_navigationSpeed * Time.deltaTime, 0.0f, 0.0f);
+            _rb.velocity = new Vector3(_navigationSpeed * Time.fixedDeltaTime, 0.0f, 0.0f);
         }
         else
         {
             // Left
-            _rb.velocity = new Vector3(_navigationSpeed * Time.deltaTime, 0.0f, 0.0f);
+            _rb.velocity = new Vector3(-_navigationSpeed * Time.fixedDeltaTime, 0.0f, 0.0f);
         }
     }
 
@@ -82,12 +82,12 @@ public class PlayerManager : MonoBehaviour
         if (leftDirection.y > 0)
         {
             // Up
-            _rb.velocity = new Vector3(0.0f, -_navigationSpeed * Time.deltaTime, 0.0f);
+            _rb.velocity = new Vector3(0.0f, -_navigationSpeed * Time.fixedDeltaTime, 0.0f);
         }
         else
         {
             // Down
-            _rb.velocity = new Vector3(0.0f, _navigationSpeed * Time.deltaTime, 0.0f);
+            _rb.velocity = new Vector3(0.0f, _navigationSpeed * Time.fixedDeltaTime, 0.0f);
         }
     }
 
