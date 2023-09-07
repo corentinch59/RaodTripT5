@@ -55,6 +55,16 @@ public class GameManager : MonoBehaviour
     }
     public IEvent Cerveau1 => _cerveau1;
     public IEvent Cerveau2 => _cerveau2;
+    public float Health
+    {
+        get => _health;
+        set 
+        {
+            _health = value;
+            HealthFill?.Invoke();
+        }
+    }
+
     #endregion
 
     private bool isPlaying = true;
@@ -65,6 +75,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _maxDynamoCharge;
     [SerializeField] private float _chargingValue;
     [SerializeField] private float _dischargingValue;
+    [SerializeField] private float _health;
 
     private bool _wiperActivated = false;
     
@@ -75,6 +86,7 @@ public class GameManager : MonoBehaviour
     
     public static GameEvent GameFinished;
     public static GameEvent DynamoFill;
+    public static GameEvent HealthFill;
 
     private static GameManager _instance;
     public static GameManager Instance => _instance;
@@ -140,4 +152,12 @@ public class GameManager : MonoBehaviour
         NewEvent();
     }
 
+    public void DamageMecha(float damage)
+    {
+        _health = Mathf.Clamp(_health - damage, 0, 1);
+        if( _health <= 0)
+        {
+            //Game Over
+        }
+    }
 }
