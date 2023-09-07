@@ -1,12 +1,24 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    #region Properties
+    public GameObject Dusts => _dusts;
+    public GameObject PhoneCallPopup => _phoneCallPopup;
+    public GameObject TrashOverloadPopup => _trashOverloadPopup;
+    #endregion
 
     [SerializeField] private TextMeshProUGUI _goalDistanceText;
     [SerializeField] private Material dynamoMat;
 
+    [SerializeField] private Image _wiperImage;
+    [SerializeField] private GameObject _dusts;
+
+    [SerializeField]private GameObject _phoneCallPopup;
+    [SerializeField] private GameObject _trashOverloadPopup;
+    
     private static UIManager _instance;
     public static UIManager Instance => _instance;
 
@@ -37,5 +49,18 @@ public class UIManager : MonoBehaviour
     public void UpdateGoalDistanceUI()
     {
         _goalDistanceText.text = GameManager.Instance.GoalDistance.ToString() + " m";
+    }
+
+    public void UpdateWiperUI()
+    {
+        
+        if (GameManager.Instance.WiperActivated)
+        {
+            _wiperImage.color = Color.green;
+        }
+        else
+        {
+            _wiperImage.color = Color.red;
+        }
     }
 }

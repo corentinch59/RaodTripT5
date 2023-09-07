@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public delegate void GameEvent();
@@ -47,8 +48,15 @@ public class GameManager : MonoBehaviour
         get { return _dischargingValue; }
         set { _dischargingValue = value; }
     }
+    public bool WiperActivated
+    {
+        get { return _wiperActivated; }
+        set { _wiperActivated = value; }
+    }
+    public IEvent Cerveau1 => _cerveau1;
+    public IEvent Cerveau2 => _cerveau2;
     #endregion
-    
+
     private bool isPlaying = true;
     private float _dynamoCharge = 0;
 
@@ -58,6 +66,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _chargingValue;
     [SerializeField] private float _dischargingValue;
 
+    private bool _wiperActivated = false;
+    
+    private IEvent _cerveau1;
+    private IEvent _cerveau2;
+
+    [SerializeField] private float _timeBetweenEvents;
+    
     public static GameEvent GameFinished;
     public static GameEvent DynamoFill;
 
@@ -83,6 +98,10 @@ public class GameManager : MonoBehaviour
         _dynamoCharge = _maxDynamoCharge;
 
         DynamoFill += UpdateGoalDistance;
+
+        NewEvent();
+
+        AudioManager.Instance.PlaySound("TestSound");
     }
 
     private void Update()
@@ -101,4 +120,24 @@ public class GameManager : MonoBehaviour
             GoalDistance = Mathf.Clamp(GoalDistance -= Speed, 0, float.MaxValue);
         }
     }
+
+    private void NewEvent()
+    {
+        _cerveau1 = EventManager.Instance.ChooseRandomEvent();
+        _cerveau1.BeginEvent();
+    }
+
+    public void BetweenEvents()
+    {
+        StartCoroutine(BetweenEventsCoroutine());
+    }
+
+    private IEnumerator BetweenEventsCoroutine()
+    {
+        Debug.Log("Start Between Event");
+        yield return new WaitForSeconds(_timeBetweenEvents);
+        Debug.Log("End Between Event");
+        NewEvent();
+    }
+
 }
