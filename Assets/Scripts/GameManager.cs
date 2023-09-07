@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
         OxygenCharge = _maxOxygenCharge;
 
         NewBrainCycle(Cerveau1);
-        //NewBrainCycle(Cerveau2);
+        NewBrainCycle(Cerveau2);
     }
 
     private void Update()
@@ -202,11 +202,11 @@ public class GameManager : MonoBehaviour
     {
         while (_isFillingOxygen)
         {
-            if(_oxygenButton1Pressed && ((_oxygenRatio>= 0.25f && _oxygenRatio <=0.5f) || (_oxygenRatio >= 0.75f && _oxygenRatio <= 1.0f))){
+            if(_oxygenButton1Pressed && ((_oxygenRatio>= 0.25f && _oxygenRatio <0.5f) || (_oxygenRatio >= 0.75f && _oxygenRatio < 1.0f))){
                 OxygenCharge += _oxygenFillingAmount;
                 yield return new WaitForSeconds(_oxygenFillingSpeed);
             }
-            else if(_oxygenButton2Pressed && ((_oxygenRatio >= 0.0f && _oxygenRatio <= 0.25f) || (_oxygenRatio >= 0.50f && _oxygenRatio <= 0.75f)))
+            else if(_oxygenButton2Pressed && ((_oxygenRatio >= 0.0f && _oxygenRatio < 0.25f) || (_oxygenRatio >= 0.50f && _oxygenRatio < 0.75f)))
             {
                 OxygenCharge += _oxygenFillingAmount;
                 yield return new WaitForSeconds(_oxygenFillingSpeed);
@@ -214,7 +214,11 @@ public class GameManager : MonoBehaviour
             else
             {
                 yield return new WaitForSeconds(_oxygeneCoyoteTime);
-                _isFillingOxygen = false;
+                if(!_oxygenButton1Pressed && !_oxygenButton2Pressed)
+                {
+                    _isFillingOxygen = false;
+                }
+                
             }
         }
         
@@ -223,9 +227,14 @@ public class GameManager : MonoBehaviour
     public void StartLosingOxygen()
     {
         _oxygenEventOn = true;
+        StartCoroutine(OxygenTimer());
         StartCoroutine(LosingOxygen());
     }
-
+    private IEnumerator OxygenTimer() 
+    {
+        yield return new WaitForSeconds(_oxygenEventDuration);
+        _oxygenEventOn = false;
+    }
     private IEnumerator LosingOxygen()
     {
         while(_oxygenCharge > 0 && _oxygenEventOn)
@@ -240,6 +249,13 @@ public class GameManager : MonoBehaviour
                 yield return null;
             }
 
+        }
+        foreach (Cerveau cerveau in cerveaux)
+        {
+            if (cerveau.EventCerv is Oxygen)
+            {
+                cerveau.CompleteEvent();
+            }
         }
     }
 }

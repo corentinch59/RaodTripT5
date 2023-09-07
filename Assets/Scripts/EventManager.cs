@@ -24,8 +24,8 @@ public class EventManager : MonoBehaviour
 
     public IEvent ChooseRandomEvent()
     {
-        //int temp = Random.Range(0, events.Length);
-        int temp = 0;
+        int temp = Random.Range(0, events.Length);
+        //int temp = 0;
 
         IEvent chosenEvent = events[temp];
 

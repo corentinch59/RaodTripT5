@@ -2008,15 +2008,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _goalDistance: 1000
   _speed: 0.1
-  _maxDynamoCharge: 10
+  _maxDynamoCharge: 1000
   _chargingValue: 1
   _dischargingValue: 0.1
   _maxOxygenCharge: 24
   _oxygenFillingAmount: 1
   _oxygenFillingSpeed: 0.3
+  _oxygeneCoyoteTime: 0.5
   _oxygenLoosingAmount: 1
   _oxygenLoosingSpeed: 1
-  _oxygenEventDuration: 5
+  _oxygenEventDuration: 10
   cerveaux:
   - {fileID: 0}
   - {fileID: 0}
