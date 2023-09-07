@@ -19,16 +19,8 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    public float Speed
-    {
-        get { return _speed; }
-        set { _speed = value; }
-    }
-    public float MaxDynamoCharge
-    {
-        get { return _maxDynamoCharge; }
-        set { _maxDynamoCharge = value; }
-    }
+    public float Speed => _speed;
+    public float MaxDynamoCharge => _maxDynamoCharge;
     public float DynamoCharge
     {
         get { return _dynamoCharge; }
@@ -38,15 +30,28 @@ public class GameManager : MonoBehaviour
             DynamoFill?.Invoke();
         }
     }
-    public float ChargingValue
+    public float ChargingValue => _chargingValue;
+    public float DischargingValue => _dischargingValue;
+    public float OxygenCharge
     {
-        get { return _chargingValue; }
-        set { _chargingValue = value; }
+        get => _oxygenCharge;
+        set
+        {
+            _oxygenCharge = value;
+            _oxygenRatio = _oxygenCharge / _maxOxygenCharge;
+            OxygenFill?.Invoke();
+        }
     }
-    public float DischargingValue
+    public float OxygenRatio => _oxygenRatio;
+    public bool OxygenButton1Pressed
     {
-        get { return _dischargingValue; }
-        set { _dischargingValue = value; }
+        get => _oxygenButton1Pressed;
+        set => _oxygenButton1Pressed = value;
+    }
+    public bool OxygenButton2Pressed
+    {
+        get => _oxygenButton2Pressed;
+        set => _oxygenButton2Pressed = value;
     }
     public bool WiperActivated
     {
@@ -65,39 +70,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _dischargingValue;
 
     private float _oxygenCharge;
-    public float OxygenCharge
-    {
-        get => _oxygenCharge; 
-        set
-        {
-            _oxygenCharge = value;
-            _oxygenRatio = _oxygenCharge / _maxOxygenCharge;
-            OxygenFill?.Invoke();
-        }
-    }
     [SerializeField] private float _maxOxygenCharge;
-    public float MaxOxygenCharge => _maxOxygenCharge;
     private float _oxygenRatio;
-    public float OxygenRatio => _oxygenRatio;
-    [SerializeField]private float _oxygenFillingAmount;
-    [SerializeField]private float _oxygenFillingSpeed;
+    [SerializeField] private float _oxygenFillingAmount;
+    [SerializeField] private float _oxygenFillingSpeed;
     private bool _isFillingOxygen = false;
-    [SerializeField]private float _oxygeneCoyoteTime = 0.5f;
+    [SerializeField] private float _oxygeneCoyoteTime = 0.5f;
     [SerializeField] private float _oxygenLoosingAmount;
     [SerializeField] private float _oxygenLoosingSpeed;
     [SerializeField] private float _oxygenEventDuration;
     private bool _oxygenButton1Pressed = false;
-    public bool OxygenButton1Pressed
-    {
-        get => _oxygenButton1Pressed;
-        set => _oxygenButton1Pressed = value;
-    }
     private bool _oxygenButton2Pressed = false;
-    public bool OxygenButton2Pressed
-    {
-        get => _oxygenButton2Pressed;
-        set => _oxygenButton2Pressed = value;
-    }
     private bool _oxygenEventOn = false;
     
     private bool _wiperActivated = false;
@@ -222,7 +205,6 @@ public class GameManager : MonoBehaviour
             {
                 yield return null;
             }
-
         }
         foreach (Cerveau cerveau in Cerveau.cerveaux)
         {
