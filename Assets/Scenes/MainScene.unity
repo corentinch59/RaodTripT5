@@ -1912,9 +1912,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _goalDistance: 1000
   _maxSpeed: 0.1
-  _maxDynamoCharge: 10
-  _chargingValue: 1
-  _dischargingValue: 0.1
+  _maxDynamoCharge: 20
+  _chargingValue: 0.2
+  _dischargingValue: 0.02
   _health: 1
   _maxHealth: 1
   _maxOxygenCharge: 24
