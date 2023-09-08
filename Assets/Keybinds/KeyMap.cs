@@ -37,6 +37,24 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Oxygen"",
+                    ""type"": ""Button"",
+                    ""id"": ""cca0d182-263c-4f98-836e-e276f213f521"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Oxygen2"",
+                    ""type"": ""Button"",
+                    ""id"": ""d94160ee-1861-4952-a9d9-8bf17b053205"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Wiper"",
                     ""type"": ""Value"",
                     ""id"": ""32884280-6bdd-4ee7-890e-78e4e632fece"",
@@ -267,6 +285,28 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""action"": ""RightJoystick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb01a479-364d-4609-b6d3-d36cfcf42cda"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Oxygen2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5379d22a-a27f-432e-b11c-780f799b5368"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Oxygen"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -276,6 +316,8 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         // PlayerControls
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
         m_PlayerControls_Dynamo = m_PlayerControls.FindAction("Dynamo", throwIfNotFound: true);
+        m_PlayerControls_Oxygen = m_PlayerControls.FindAction("Oxygen", throwIfNotFound: true);
+        m_PlayerControls_Oxygen2 = m_PlayerControls.FindAction("Oxygen2", throwIfNotFound: true);
         m_PlayerControls_Wiper = m_PlayerControls.FindAction("Wiper", throwIfNotFound: true);
         m_PlayerControls_PhoneCall = m_PlayerControls.FindAction("PhoneCall", throwIfNotFound: true);
         m_PlayerControls_TrashOverload = m_PlayerControls.FindAction("TrashOverload", throwIfNotFound: true);
@@ -344,6 +386,8 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerControls;
     private List<IPlayerControlsActions> m_PlayerControlsActionsCallbackInterfaces = new List<IPlayerControlsActions>();
     private readonly InputAction m_PlayerControls_Dynamo;
+    private readonly InputAction m_PlayerControls_Oxygen;
+    private readonly InputAction m_PlayerControls_Oxygen2;
     private readonly InputAction m_PlayerControls_Wiper;
     private readonly InputAction m_PlayerControls_PhoneCall;
     private readonly InputAction m_PlayerControls_TrashOverload;
@@ -355,6 +399,8 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         private @KeyMap m_Wrapper;
         public PlayerControlsActions(@KeyMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Dynamo => m_Wrapper.m_PlayerControls_Dynamo;
+        public InputAction @Oxygen => m_Wrapper.m_PlayerControls_Oxygen;
+        public InputAction @Oxygen2 => m_Wrapper.m_PlayerControls_Oxygen2;
         public InputAction @Wiper => m_Wrapper.m_PlayerControls_Wiper;
         public InputAction @PhoneCall => m_Wrapper.m_PlayerControls_PhoneCall;
         public InputAction @TrashOverload => m_Wrapper.m_PlayerControls_TrashOverload;
@@ -373,6 +419,12 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @Dynamo.started += instance.OnDynamo;
             @Dynamo.performed += instance.OnDynamo;
             @Dynamo.canceled += instance.OnDynamo;
+            @Oxygen.started += instance.OnOxygen;
+            @Oxygen.performed += instance.OnOxygen;
+            @Oxygen.canceled += instance.OnOxygen;
+            @Oxygen2.started += instance.OnOxygen2;
+            @Oxygen2.performed += instance.OnOxygen2;
+            @Oxygen2.canceled += instance.OnOxygen2;
             @Wiper.started += instance.OnWiper;
             @Wiper.performed += instance.OnWiper;
             @Wiper.canceled += instance.OnWiper;
@@ -398,6 +450,12 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @Dynamo.started -= instance.OnDynamo;
             @Dynamo.performed -= instance.OnDynamo;
             @Dynamo.canceled -= instance.OnDynamo;
+            @Oxygen.started -= instance.OnOxygen;
+            @Oxygen.performed -= instance.OnOxygen;
+            @Oxygen.canceled -= instance.OnOxygen;
+            @Oxygen2.started -= instance.OnOxygen2;
+            @Oxygen2.performed -= instance.OnOxygen2;
+            @Oxygen2.canceled -= instance.OnOxygen2;
             @Wiper.started -= instance.OnWiper;
             @Wiper.performed -= instance.OnWiper;
             @Wiper.canceled -= instance.OnWiper;
@@ -436,6 +494,8 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     public interface IPlayerControlsActions
     {
         void OnDynamo(InputAction.CallbackContext context);
+        void OnOxygen(InputAction.CallbackContext context);
+        void OnOxygen2(InputAction.CallbackContext context);
         void OnWiper(InputAction.CallbackContext context);
         void OnPhoneCall(InputAction.CallbackContext context);
         void OnTrashOverload(InputAction.CallbackContext context);
