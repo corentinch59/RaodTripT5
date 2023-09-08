@@ -164,6 +164,8 @@ public class GameManager : MonoBehaviour
         OxygenCharge = _maxOxygenCharge;
 
         GameOver += GameOverScreen;
+        HealthFill?.Invoke();
+        OxygenFill?.Invoke();
 
         Cerveau.NewBrainCycle(_cerveau1);
         Cerveau.NewBrainCycle(_cerveau2);
@@ -277,10 +279,12 @@ public class GameManager : MonoBehaviour
         playerInput.actions.FindActionMap("PlayerControls").Disable();
         playerInput.actions.FindActionMap("GO").Enable();
         gameoverScreen.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void ReloadScene()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
