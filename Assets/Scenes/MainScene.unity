@@ -363,7 +363,7 @@ MonoBehaviour:
   _wiperImage: {fileID: 1049196064}
   _dusts: {fileID: 903700259}
   _phoneCallPopup: {fileID: 132289920}
-  _trashOverloadPopup: {fileID: 0}
+  _trashOverloadPopup: {fileID: 158762905}
   btnTrashMat: {fileID: 2100000, guid: 6bc3e53de93719542ba9435249742a4c, type: 2}
   btnOxygenRedMat: {fileID: 2100000, guid: d363697110548d24e97b1b6e3ed2a08b, type: 2}
   btnPhoneCall: {fileID: 2100000, guid: 83f29b01230c24942a1a1e09615554b4, type: 2}
