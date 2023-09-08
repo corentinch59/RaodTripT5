@@ -151,12 +151,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.Instance.PlaySound("BgMusic");
         _cerveau1 = gameObject.AddComponent<Cerveau>();
         _cerveau1.InitCerv(_timeBetweenEvents);
         _cerveau2 = gameObject.AddComponent<Cerveau>();
         _cerveau2.InitCerv(_timeBetweenEvents2);
-
-        GameFinished += () => { Debug.Log("GameFinished"); };
 
         DynamoFill += UpdateGoalDistance;
         _dynamoCharge = _maxDynamoCharge;
@@ -164,6 +163,8 @@ public class GameManager : MonoBehaviour
         OxygenCharge = _maxOxygenCharge;
 
         GameOver += GameOverScreen;
+
+        
 
         Cerveau.NewBrainCycle(_cerveau1);
         Cerveau.NewBrainCycle(_cerveau2);
@@ -276,7 +277,9 @@ public class GameManager : MonoBehaviour
     {
         playerInput.actions.FindActionMap("PlayerControls").Disable();
         playerInput.actions.FindActionMap("GO").Enable();
+        AudioManager.Instance.StopAllSounds();
         gameoverScreen.SetActive(true);
+        
     }
 
     public void ReloadScene()

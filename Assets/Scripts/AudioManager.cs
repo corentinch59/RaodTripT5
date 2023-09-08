@@ -33,6 +33,7 @@ public class AudioManager : MonoBehaviour
         }
 
         _playPhoneCall = _PlayPhoneCall();
+        GameManager.HealthFill += PlayHitSound;
     }
 
     private void SetSound(Sound sound)
@@ -83,14 +84,17 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayDynamoSound()
+    public void StopAllSounds()
     {
-
+        foreach(Sound sound in _sounds)
+        {
+            sound.Source.Stop();
+        }
     }
 
-    public void StopDynamoSound()
+    public void PlayHitSound()
     {
-
+        PlaySound("HitObject");
     }
 
     public void PlayPhoneCall()
