@@ -119,6 +119,8 @@ public class GameManager : MonoBehaviour
     private Cerveau _cerveau1;
     private Cerveau _cerveau2;
 
+    public GameObject gameoverScreen;
+
     [SerializeField] private float _timeBetweenEvents;
     [SerializeField] private float _timeBetweenEvents2;
 
@@ -159,6 +161,8 @@ public class GameManager : MonoBehaviour
         _dynamoCharge = _maxDynamoCharge;
 
         OxygenCharge = _maxOxygenCharge;
+
+        GameOver += GameOverScreen;
 
         Cerveau.NewBrainCycle(_cerveau1);
         Cerveau.NewBrainCycle(_cerveau2);
@@ -270,6 +274,7 @@ public class GameManager : MonoBehaviour
     {
         playerInput.actions.FindActionMap("PlayerControls").Disable();
         playerInput.actions.FindActionMap("GO").Enable();
+        gameoverScreen.SetActive(true);
     }
 
     public void ReloadScene()
