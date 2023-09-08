@@ -39,7 +39,7 @@ public class PlayerManager : MonoBehaviour
         Vector2 temp = ctx.ReadValue<Vector2>();
 
         float angle = Vector2.SignedAngle(temp, _previous);
-        if (angle > 0)
+        if (angle < 0)
         {
             GameManager.Instance.DynamoCharge = Mathf.Clamp(GameManager.Instance.DynamoCharge += GameManager.Instance.ChargingValue, 0, GameManager.Instance.MaxDynamoCharge);
         }

@@ -64,6 +64,8 @@ public class UIManager : MonoBehaviour
         btnPhoneCall.SetColor("_EmissionColor", new Color(1.0f, 1.0f, 1f));
         btnPhoneCall.SetColor("_BaseColor", new Color(1.0f, 1.0f, 1f));
 
+        healthMat.SetFloat("_Health", GameManager.Instance.Health / GameManager.Instance.MaxHealth);
+
         btnOxygenRedMat.DisableKeyword("_EmissionMap");
     }
 
