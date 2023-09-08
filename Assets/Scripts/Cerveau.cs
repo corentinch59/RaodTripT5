@@ -4,22 +4,34 @@ using UnityEngine;
 
 public class Cerveau : MonoBehaviour
 {
-    
-    
-    private IEvent _eventCerv;
+    #region Properties
+
     public IEvent EventCerv
     {
         get { return _eventCerv; }
         set { _eventCerv = value; }
     }
-
-    private float _timer;
     public float Timer
     {
         get { return _timer; }
         set { _timer = value; }
     }
+    #endregion
 
+    private IEvent _eventCerv;
+    private float _timer;
+    
+    public static List<Cerveau> cerveaux = new List<Cerveau>();
+
+    public void Awake()
+    {
+        cerveaux.Add(this);
+    }
+
+    public void InitCerv(float timer)
+    {
+        _timer = timer;
+    }
 
     public void NewEvent()
     {
@@ -35,9 +47,29 @@ public class Cerveau : MonoBehaviour
 
     public IEnumerator BetweenEvents()
     {
-        Debug.Log("Start Between Event Brain 1");
+        Debug.Log("Start Between" + this.name);
         yield return new WaitForSeconds(_timer);
-        Debug.Log("End Between Event Brain 1");
-        GameManager.Instance.NewBrainCycle(this);
+        Debug.Log("End Between" + this.name);
+        NewBrainCycle(this);
+    }
+
+    public static void NewBrainCycle(Cerveau cerveau)
+    {
+        IEvent tempEvent = EventManager.Instance.ChooseRandomEvent();
+        foreach (Cerveau cerv in cerveaux)
+        {
+            if (cerv != cerveau)
+            {
+                if (tempEvent == cerv.EventCerv)
+                {
+                    NewBrainCycle(cerveau);
+                }
+                else
+                {
+                    cerveau.EventCerv = tempEvent;
+                    cerveau.EventCerv.BeginEvent();
+                }
+            }
+        }
     }
 }

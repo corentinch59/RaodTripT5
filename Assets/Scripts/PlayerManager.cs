@@ -18,6 +18,16 @@ public class PlayerManager : MonoBehaviour
     {
         EvaluateDirection(leftDirection, rightDirection);
     }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        Obstacle obstacle = other.gameObject.GetComponent<Obstacle>();
+       if(obstacle != null)
+       {
+            GameManager.Instance.DamageMecha(obstacle.Damage);
+       }
+        Destroy(other.gameObject);
+    }
 
     public void Dynamo(InputAction.CallbackContext ctx)
     {
@@ -91,6 +101,37 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void OnOxygenButton1(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            if((GameManager.Instance.OxygenRatio >= 0.25f && GameManager.Instance.OxygenRatio < 0.5f) || (GameManager.Instance.OxygenRatio >= 0.75f && GameManager.Instance.OxygenRatio < 1.0f))
+            {
+                GameManager.Instance.OxygenButton1Pressed = true;
+                GameManager.Instance.StartFillOxygen();
+            }
+        }else if (ctx.canceled)
+        {
+            GameManager.Instance.OxygenButton1Pressed = false;
+        }
+    }
+
+    public void OnOxygenButton2(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            if ((GameManager.Instance.OxygenRatio >= 0.0f && GameManager.Instance.OxygenRatio < 0.25f) || (GameManager.Instance.OxygenRatio >= 0.50f && GameManager.Instance.OxygenRatio < 0.75f))
+            {
+                GameManager.Instance.OxygenButton2Pressed = true;
+                GameManager.Instance.StartFillOxygen();
+            }
+        }
+        else if (ctx.canceled)
+        {
+            GameManager.Instance.OxygenButton2Pressed = false;
+        }
+    }
+
     public void Wiper(InputAction.CallbackContext ctx)
     {
         Vector2 temp = ctx.ReadValue<Vector2>();
@@ -101,7 +142,7 @@ public class PlayerManager : MonoBehaviour
             GameManager.Instance.WiperActivated = true;
             UIManager.Instance.UpdateWiperUI();
 
-            foreach (Cerveau cerveau in GameManager.Instance.cerveaux)
+            foreach (Cerveau cerveau in Cerveau.cerveaux)
             {
                 if (ctx.performed && cerveau.EventCerv is DustCloud)
                 {
@@ -119,7 +160,7 @@ public class PlayerManager : MonoBehaviour
 
     public void DeclinePhone(InputAction.CallbackContext ctx)
     {
-        foreach(Cerveau cerveau in GameManager.Instance.cerveaux)
+        foreach(Cerveau cerveau in Cerveau.cerveaux)
         {
             if (ctx.started && cerveau.EventCerv is PhoneCall)
             {
@@ -131,7 +172,7 @@ public class PlayerManager : MonoBehaviour
 
     public void LiberateTrash(InputAction.CallbackContext ctx)
     {
-        foreach (Cerveau cerveau in GameManager.Instance.cerveaux)
+        foreach (Cerveau cerveau in Cerveau.cerveaux)
         {
             if (ctx.started && cerveau.EventCerv is TrashOverload)
             {
@@ -142,7 +183,7 @@ public class PlayerManager : MonoBehaviour
 
     public void TurnOffAlarmClock(InputAction.CallbackContext ctx)
     {
-        foreach (Cerveau cerveau in GameManager.Instance.cerveaux)
+        foreach (Cerveau cerveau in Cerveau.cerveaux)
         {
             if (ctx.started && cerveau.EventCerv is AlarmClock)
             {

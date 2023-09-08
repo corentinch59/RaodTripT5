@@ -15,6 +15,24 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Oxygen",
+                    "type": "Button",
+                    "id": "cca0d182-263c-4f98-836e-e276f213f521",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Oxygen2",
+                    "type": "Button",
+                    "id": "d94160ee-1861-4952-a9d9-8bf17b053205",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Wiper",
                     "type": "Value",
                     "id": "32884280-6bdd-4ee7-890e-78e4e632fece",
@@ -245,6 +263,28 @@
                     "action": "RightJoystick",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "bb01a479-364d-4609-b6d3-d36cfcf42cda",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Oxygen2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5379d22a-a27f-432e-b11c-780f799b5368",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Oxygen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
