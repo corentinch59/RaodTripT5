@@ -99,13 +99,13 @@ public class PlayerManager : MonoBehaviour
         if (leftDirection.y > 0)
         {
             // Up
-            if (transform.position.y > upLimit.position.y) return;
+            if (transform.position.y < downLimit.position.y) return;
             _rb.velocity = new Vector3(0.0f, -_navigationSpeed * Time.fixedDeltaTime, 0.0f);
         }
         else
         {
             // Down
-            if (transform.position.y < downLimit.position.y) return;
+            if (transform.position.y > upLimit.position.y) return;
             _rb.velocity = new Vector3(0.0f, _navigationSpeed * Time.fixedDeltaTime, 0.0f);
         }
     }
