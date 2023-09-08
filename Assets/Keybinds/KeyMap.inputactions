@@ -287,6 +287,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "GO",
+            "id": "11512382-816d-43ba-a149-d0692c395e06",
+            "actions": [
+                {
+                    "name": "StarGame",
+                    "type": "Button",
+                    "id": "dc330bc4-a7fd-4c6c-9e3e-cd5fee024e50",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c2f3a27a-32d6-4065-a3d8-f9b78ca8426a",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StarGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

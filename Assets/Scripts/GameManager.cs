@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public delegate void GameEvent();
 
@@ -48,6 +50,10 @@ public class GameManager : MonoBehaviour
             _oxygenCharge = value;
             _oxygenRatio = _oxygenCharge / _maxOxygenCharge;
             OxygenFill?.Invoke();
+            if( _oxygenCharge <= 0 ) 
+            {
+                GameOver?.Invoke();
+            }
         }
     }
     public float OxygenRatio => _oxygenRatio;
@@ -81,6 +87,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     private bool isPlaying = true;
+    public bool IsPlaying => isPlaying;
     private float _dynamoCharge = 0;
 
     [SerializeField] private float _goalDistance;
@@ -107,6 +114,7 @@ public class GameManager : MonoBehaviour
     private bool _oxygenEventOn = false;
 
     private bool _wiperActivated = false;
+    public PlayerInput playerInput;
 
     private Cerveau _cerveau1;
     private Cerveau _cerveau2;
@@ -118,6 +126,7 @@ public class GameManager : MonoBehaviour
     public static GameEvent DynamoFill;
     public static GameEvent OxygenFill;
     public static GameEvent HealthFill;
+    public static GameEvent GameOver;
 
     private static GameManager _instance;
     public static GameManager Instance => _instance;
@@ -133,6 +142,8 @@ public class GameManager : MonoBehaviour
         {
             _instance = this;
         }
+        playerInput.actions.FindActionMap("PlayerControls").Enable();
+        playerInput.actions.FindActionMap("GO").Disable();
     }
 
     private void Start()
@@ -179,7 +190,6 @@ public class GameManager : MonoBehaviour
             AudioManager.Instance.StopSound("AirLost");
             StartCoroutine(FillOxygen());
         }
-
     }
 
     private IEnumerator FillOxygen()
@@ -252,7 +262,18 @@ public class GameManager : MonoBehaviour
         _health = Mathf.Clamp(_health - damage, 0, 1);
         if( _health <= 0)
         {
-            //Game Over
+            GameOver?.Invoke();
         }
+    }
+
+    public void GameOverScreen()
+    {
+        playerInput.actions.FindActionMap("PlayerControls").Disable();
+        playerInput.actions.FindActionMap("GO").Enable();
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

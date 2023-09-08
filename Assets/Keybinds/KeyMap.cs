@@ -309,6 +309,34 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""GO"",
+            ""id"": ""11512382-816d-43ba-a149-d0692c395e06"",
+            ""actions"": [
+                {
+                    ""name"": ""StarGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc330bc4-a7fd-4c6c-9e3e-cd5fee024e50"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c2f3a27a-32d6-4065-a3d8-f9b78ca8426a"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StarGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -324,6 +352,9 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         m_PlayerControls_AlarmClock = m_PlayerControls.FindAction("AlarmClock", throwIfNotFound: true);
         m_PlayerControls_LeftJoystick = m_PlayerControls.FindAction("LeftJoystick", throwIfNotFound: true);
         m_PlayerControls_RightJoystick = m_PlayerControls.FindAction("RightJoystick", throwIfNotFound: true);
+        // GO
+        m_GO = asset.FindActionMap("GO", throwIfNotFound: true);
+        m_GO_StarGame = m_GO.FindAction("StarGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -491,6 +522,52 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         }
     }
     public PlayerControlsActions @PlayerControls => new PlayerControlsActions(this);
+
+    // GO
+    private readonly InputActionMap m_GO;
+    private List<IGOActions> m_GOActionsCallbackInterfaces = new List<IGOActions>();
+    private readonly InputAction m_GO_StarGame;
+    public struct GOActions
+    {
+        private @KeyMap m_Wrapper;
+        public GOActions(@KeyMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @StarGame => m_Wrapper.m_GO_StarGame;
+        public InputActionMap Get() { return m_Wrapper.m_GO; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GOActions set) { return set.Get(); }
+        public void AddCallbacks(IGOActions instance)
+        {
+            if (instance == null || m_Wrapper.m_GOActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GOActionsCallbackInterfaces.Add(instance);
+            @StarGame.started += instance.OnStarGame;
+            @StarGame.performed += instance.OnStarGame;
+            @StarGame.canceled += instance.OnStarGame;
+        }
+
+        private void UnregisterCallbacks(IGOActions instance)
+        {
+            @StarGame.started -= instance.OnStarGame;
+            @StarGame.performed -= instance.OnStarGame;
+            @StarGame.canceled -= instance.OnStarGame;
+        }
+
+        public void RemoveCallbacks(IGOActions instance)
+        {
+            if (m_Wrapper.m_GOActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGOActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GOActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GOActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GOActions @GO => new GOActions(this);
     public interface IPlayerControlsActions
     {
         void OnDynamo(InputAction.CallbackContext context);
@@ -502,5 +579,9 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         void OnAlarmClock(InputAction.CallbackContext context);
         void OnLeftJoystick(InputAction.CallbackContext context);
         void OnRightJoystick(InputAction.CallbackContext context);
+    }
+    public interface IGOActions
+    {
+        void OnStarGame(InputAction.CallbackContext context);
     }
 }

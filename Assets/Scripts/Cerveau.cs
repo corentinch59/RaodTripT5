@@ -55,19 +55,22 @@ public class Cerveau : MonoBehaviour
 
     public static void NewBrainCycle(Cerveau cerveau)
     {
-        IEvent tempEvent = EventManager.Instance.ChooseRandomEvent();
-        foreach (Cerveau cerv in cerveaux)
+        if(GameManager.Instance.IsPlaying) 
         {
-            if (cerv != cerveau)
+            IEvent tempEvent = EventManager.Instance.ChooseRandomEvent();
+            foreach (Cerveau cerv in cerveaux)
             {
-                if (tempEvent == cerv.EventCerv)
+                if (cerv != cerveau)
                 {
-                    NewBrainCycle(cerveau);
-                }
-                else
-                {
-                    cerveau.EventCerv = tempEvent;
-                    cerveau.EventCerv.BeginEvent();
+                    if (tempEvent == cerv.EventCerv)
+                    {
+                        NewBrainCycle(cerveau);
+                    }
+                    else
+                    {
+                        cerveau.EventCerv = tempEvent;
+                        cerveau.EventCerv.BeginEvent();
+                    }
                 }
             }
         }
