@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Cerveau : MonoBehaviour
@@ -51,6 +52,17 @@ public class Cerveau : MonoBehaviour
         yield return new WaitForSeconds(_timer);
         Debug.Log("End Between" + this.name);
         NewBrainCycle(this);
+    }
+
+    public void FirstCycle()
+    {
+        StartCoroutine(_FirstCycle(_timer, this));
+    }
+
+    public IEnumerator _FirstCycle(float _startTimer, Cerveau _cervax)
+    {
+        yield return new WaitForSeconds(_startTimer);
+        NewBrainCycle(_cervax);
     }
 
     public static void NewBrainCycle(Cerveau cerveau)

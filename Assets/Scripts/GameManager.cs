@@ -167,9 +167,11 @@ public class GameManager : MonoBehaviour
         OxygenFill?.Invoke();
 
 
+        _cerveau1.FirstCycle();
+        _cerveau2.FirstCycle();
 
-        Cerveau.NewBrainCycle(_cerveau1);
-        Cerveau.NewBrainCycle(_cerveau2);
+        //Cerveau.NewBrainCycle(_cerveau1);
+        //Cerveau.NewBrainCycle(_cerveau2);
     }
 
     private void Update()
