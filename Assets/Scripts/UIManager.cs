@@ -21,8 +21,6 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameObject _phoneCallPopup;
     [SerializeField] private GameObject _trashOverloadPopup;
-
-    [SerializeField] private Slider _oxygenSlider;
     
     private static UIManager _instance;
     public static UIManager Instance => _instance;
