@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Material healthMat;
     [SerializeField] private Material oxygenMat;
 
-    [SerializeField] private GameObject _wiper;
+    [SerializeField] private Image _wiperImage;
     [SerializeField] private GameObject _dusts;
 
     [SerializeField] private GameObject _phoneCallPopup;
@@ -92,11 +92,11 @@ public class UIManager : MonoBehaviour
         
         if (GameManager.Instance.WiperActivated)
         {
-            _wiper.SetActive(true);
+            _wiperImage.color = Color.green;
         }
         else
         {
-            _wiper.SetActive(false);
+            _wiperImage.color = Color.red;
         }
     }
 }
