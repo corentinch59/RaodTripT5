@@ -10,13 +10,13 @@ public class UIManager : MonoBehaviour
     public GameObject TrashOverloadPopup => _trashOverloadPopup;
     #endregion
 
-    [SerializeField] private TextMeshProUGUI _goalDistanceText;
+    [SerializeField] private TextMeshPro _goalDistanceText;
 
     [SerializeField] private Material dynamoMat;
     [SerializeField] private Material healthMat;
     [SerializeField] private Material oxygenMat;
 
-    [SerializeField] private Image _wiperImage;
+    [SerializeField] private GameObject _wiper;
     [SerializeField] private GameObject _dusts;
 
     [SerializeField] private GameObject _phoneCallPopup;
@@ -92,11 +92,11 @@ public class UIManager : MonoBehaviour
         
         if (GameManager.Instance.WiperActivated)
         {
-            _wiperImage.color = Color.green;
+            _wiper.SetActive(true);
         }
         else
         {
-            _wiperImage.color = Color.red;
+            _wiper.SetActive(false);
         }
     }
 }
