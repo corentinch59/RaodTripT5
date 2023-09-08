@@ -725,7 +725,7 @@ MonoBehaviour:
   - _name: HitObject
     _clip: {fileID: 8300000, guid: d6bc2b91b2eb5d7478c15f2ae5189fe5, type: 3}
     _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
-    _loop: 1
+    _loop: 0
     _volume: 0.6
     _pitch: 1
   _audioMixer: {fileID: 24100000, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
@@ -1035,7 +1035,7 @@ MonoBehaviour:
   _maxSpeed: 0.5
   _maxDynamoCharge: 20
   _chargingValue: 1
-  _dischargingValue: 0.01
+  _dischargingValue: 0.025
   _health: 1
   _maxHealth: 1
   _maxOxygenCharge: 24
@@ -1047,8 +1047,8 @@ MonoBehaviour:
   _oxygenEventDuration: 5
   playerInput: {fileID: 1443814945}
   gameoverScreen: {fileID: 1775872714}
-  _timeBetweenEvents: 4
-  _timeBetweenEvents2: 9
+  _timeBetweenEvents: 6
+  _timeBetweenEvents2: 13
 --- !u!4 &1227416515
 Transform:
   m_ObjectHideFlags: 0

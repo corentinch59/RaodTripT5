@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                _speed = _maxSpeed * 0.5f;
+                _speed = _maxSpeed * 0.2f;
             }
             DynamoFill?.Invoke();
         }
@@ -184,6 +184,9 @@ public class GameManager : MonoBehaviour
     private void UpdateGoalDistance()
     {
         if(_dynamoCharge > 0)
+        {
+            GoalDistance = Mathf.Clamp(GoalDistance -= Speed, 0, float.MaxValue);
+        }else if(_dynamoCharge <= 0)
         {
             GoalDistance = Mathf.Clamp(GoalDistance -= Speed, 0, float.MaxValue);
         }
