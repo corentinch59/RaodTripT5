@@ -18,6 +18,16 @@ public class PlayerManager : MonoBehaviour
     {
         EvaluateDirection(leftDirection, rightDirection);
     }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        Obstacle obstacle = other.gameObject.GetComponent<Obstacle>();
+       if(obstacle != null)
+       {
+            GameManager.Instance.DamageMecha(obstacle.Damage);
+       }
+        Destroy(other.gameObject);
+    }
 
     public void Dynamo(InputAction.CallbackContext ctx)
     {

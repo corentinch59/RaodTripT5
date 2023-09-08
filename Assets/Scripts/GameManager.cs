@@ -58,6 +58,18 @@ public class GameManager : MonoBehaviour
         get { return _wiperActivated; }
         set { _wiperActivated = value; }
     }
+    
+    public IEvent Cerveau1 => _cerveau1;
+    public IEvent Cerveau2 => _cerveau2;
+    public float Health
+    {
+        get => _health;
+        set
+        {
+            _health = value;
+            HealthFill?.Invoke();
+        }
+    }
     #endregion
 
     private bool isPlaying = true;
@@ -68,6 +80,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _maxDynamoCharge;
     [SerializeField] private float _chargingValue;
     [SerializeField] private float _dischargingValue;
+    [SerializeField] private float _health;
 
     private float _oxygenCharge;
     [SerializeField] private float _maxOxygenCharge;
@@ -82,7 +95,7 @@ public class GameManager : MonoBehaviour
     private bool _oxygenButton1Pressed = false;
     private bool _oxygenButton2Pressed = false;
     private bool _oxygenEventOn = false;
-    
+
     private bool _wiperActivated = false;
 
     private Cerveau _cerveau1;
@@ -90,10 +103,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private float _timeBetweenEvents;
     [SerializeField] private float _timeBetweenEvents2;
-    
+
     public static GameEvent GameFinished;
     public static GameEvent DynamoFill;
     public static GameEvent OxygenFill;
+    public static GameEvent HealthFill;
 
     private static GameManager _instance;
     public static GameManager Instance => _instance;
@@ -117,7 +131,7 @@ public class GameManager : MonoBehaviour
         _cerveau1.InitCerv(_timeBetweenEvents);
         _cerveau2 = gameObject.AddComponent<Cerveau>();
         _cerveau2.InitCerv(_timeBetweenEvents2);
-        
+
         GameFinished += () => { Debug.Log("GameFinished"); };
 
         DynamoFill += UpdateGoalDistance;
@@ -155,6 +169,7 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
     private IEnumerator FillOxygen()
     {
         while (_isFillingOxygen)
@@ -175,10 +190,10 @@ public class GameManager : MonoBehaviour
                 {
                     _isFillingOxygen = false;
                 }
-                
+
             }
         }
-        
+
     }
 
     public void StartLosingOxygen()
@@ -187,11 +202,12 @@ public class GameManager : MonoBehaviour
         StartCoroutine(OxygenTimer());
         StartCoroutine(LosingOxygen());
     }
-    private IEnumerator OxygenTimer() 
+    private IEnumerator OxygenTimer()
     {
         yield return new WaitForSeconds(_oxygenEventDuration);
         _oxygenEventOn = false;
     }
+
     private IEnumerator LosingOxygen()
     {
         while(_oxygenCharge > 0 && _oxygenEventOn)
@@ -212,6 +228,16 @@ public class GameManager : MonoBehaviour
             {
                 cerveau.CompleteEvent();
             }
+        }
+    }
+}
+
+    public void DamageMecha(float damage)
+    {
+        _health = Mathf.Clamp(_health - damage, 0, 1);
+        if( _health <= 0)
+        {
+            //Game Over
         }
     }
 }
