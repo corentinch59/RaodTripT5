@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.13545586, g: 0.06294892, b: 0.10860585, a: 1}
+  m_IndirectSpecularColor: {r: 0.13536826, g: 0.062860936, b: 0.10851535, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1022,8 +1022,8 @@ MonoBehaviour:
   _goalDistance: 10000
   _maxSpeed: 0.5
   _maxDynamoCharge: 20
-  _chargingValue: 0.5
-  _dischargingValue: 0.02
+  _chargingValue: 1
+  _dischargingValue: 0.01
   _health: 1
   _maxHealth: 1
   _maxOxygenCharge: 24

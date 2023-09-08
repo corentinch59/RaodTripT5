@@ -265,6 +265,7 @@ public class GameManager : MonoBehaviour
     public void DamageMecha(float damage)
     {
         _health = Mathf.Clamp(_health - damage, 0, 1);
+        HealthFill?.Invoke();
         if( _health <= 0)
         {
             GameOver?.Invoke();
