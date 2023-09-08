@@ -74,7 +74,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateGoalDistanceUI()
     {
-        _goalDistanceText.text = GameManager.Instance.GoalDistance.ToString() + " m";
+        _goalDistanceText.text = GameManager.Instance.GoalDistance.ToString("#") + " m";
     }
 
     public void UpdateOxygenFillUI()
