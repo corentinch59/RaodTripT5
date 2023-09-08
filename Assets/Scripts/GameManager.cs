@@ -58,9 +58,7 @@ public class GameManager : MonoBehaviour
         get { return _wiperActivated; }
         set { _wiperActivated = value; }
     }
-    
-    public IEvent Cerveau1 => _cerveau1;
-    public IEvent Cerveau2 => _cerveau2;
+
     public float Health
     {
         get => _health;
