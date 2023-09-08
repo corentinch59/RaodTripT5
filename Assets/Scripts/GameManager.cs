@@ -27,6 +27,14 @@ public class GameManager : MonoBehaviour
         set
         {
             _dynamoCharge = value;
+            if(_dynamoCharge > 0)
+            {
+                _speed = _maxSpeed;
+            }
+            else
+            {
+                _speed = _maxSpeed * 0.5f;
+            }
             DynamoFill?.Invoke();
         }
     }
@@ -76,7 +84,8 @@ public class GameManager : MonoBehaviour
     private float _dynamoCharge = 0;
 
     [SerializeField] private float _goalDistance;
-    [SerializeField] private float _speed;
+    [SerializeField] private float _maxSpeed;
+    private float _speed;
     [SerializeField] private float _maxDynamoCharge;
     [SerializeField] private float _chargingValue;
     [SerializeField] private float _dischargingValue;
@@ -165,6 +174,7 @@ public class GameManager : MonoBehaviour
     {
         if (!_isFillingOxygen)
         {
+            AudioManager.Instance.PlaySound("AirFill");
             _isFillingOxygen = true;
             AudioManager.Instance.StopSound("AirLost");
             StartCoroutine(FillOxygen());
@@ -195,6 +205,7 @@ public class GameManager : MonoBehaviour
 
             }
         }
+        AudioManager.Instance.StopSound("AirFill");
         if (_oxygenEventOn)
         {
             AudioManager.Instance.PlaySound("AirLost");

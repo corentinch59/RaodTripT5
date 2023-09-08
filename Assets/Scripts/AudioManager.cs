@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private Sound[] _sounds;
     [SerializeField] private AudioMixer _audioMixer;
 
+    private bool _dynamoSoundPlaying = false;
+
     private IEnumerator _playPhoneCall;
 
     private static AudioManager _instance;
@@ -79,6 +81,16 @@ public class AudioManager : MonoBehaviour
         {
             Debug.Log(name + " doesn't exist");
         }
+    }
+
+    public void PlayDynamoSound()
+    {
+
+    }
+
+    public void StopDynamoSound()
+    {
+
     }
 
     public void PlayPhoneCall()

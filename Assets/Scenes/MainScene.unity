@@ -1653,6 +1653,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sounds:
+  - _name: Dynamo
+    _clip: {fileID: 8300000, guid: 4868a80726cc89a4abf49f86e56d4f32, type: 3}
+    _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
+    _loop: 1
+    _volume: 1
+    _pitch: 1
+  - _name: AirLost
+    _clip: {fileID: 8300000, guid: 4df4f1bc4bb50e04f975c0c1aeeec286, type: 3}
+    _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
+    _loop: 1
+    _volume: 1
+    _pitch: 1
+  - _name: AirFill
+    _clip: {fileID: 8300000, guid: 5a015318434b5de4394b57f42eb9d1d0, type: 3}
+    _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
+    _loop: 1
+    _volume: 1
+    _pitch: 1
+  - _name: AirEnd
+    _clip: {fileID: 8300000, guid: 344006a5c4b63cb4b91b1f89559503ff, type: 3}
+    _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
+    _loop: 0
+    _volume: 1
+    _pitch: 1
   - _name: AlarmClock
     _clip: {fileID: 8300000, guid: 6cac8f44de647a34cacacd5aaddae5e4, type: 3}
     _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
@@ -1683,14 +1707,8 @@ MonoBehaviour:
     _loop: 0
     _volume: 1
     _pitch: 1
-  - _name: AirLost
-    _clip: {fileID: 8300000, guid: 4df4f1bc4bb50e04f975c0c1aeeec286, type: 3}
-    _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
-    _loop: 1
-    _volume: 1
-    _pitch: 1
-  - _name: AirEnd
-    _clip: {fileID: 8300000, guid: 344006a5c4b63cb4b91b1f89559503ff, type: 3}
+  - _name: Trash
+    _clip: {fileID: 8300000, guid: 3911554af8b67224e8d56f23b90801ea, type: 3}
     _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
     _loop: 0
     _volume: 1
@@ -2162,7 +2180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _goalDistance: 1000
-  _speed: 0.1
+  _maxSpeed: 0.1
   _maxDynamoCharge: 10
   _chargingValue: 1
   _dischargingValue: 0.1
