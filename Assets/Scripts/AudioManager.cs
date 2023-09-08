@@ -32,7 +32,6 @@ public class AudioManager : MonoBehaviour
             SetSound(sound);
         }
 
-        _playPhoneCall = _PlayPhoneCall();
         GameManager.HealthFill += PlayHitSound;
     }
 
@@ -96,23 +95,4 @@ public class AudioManager : MonoBehaviour
     {
         PlaySound("HitObject");
     }
-
-    public void PlayPhoneCall()
-    {
-        StartCoroutine(_playPhoneCall);
-    }
-    private IEnumerator _PlayPhoneCall()
-    {
-        PlaySound("Ringtone");
-        yield return new WaitForSeconds(4.2f);
-        PlaySound("Voice");
-    }
-    public void StopPhoneCall()
-    {
-        StopCoroutine(_playPhoneCall);
-        StopSound("Ringtone");
-        StopSound("Voice");
-
-    }
-
 }

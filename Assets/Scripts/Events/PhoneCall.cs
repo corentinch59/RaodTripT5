@@ -8,7 +8,7 @@ public class PhoneCall : IEvent
         UIManager.Instance.PhoneCallPopup.SetActive(true);
         UIManager.Instance.btnPhoneCall.SetColor("_EmissionColor", new Color(0.0f, 1.0f, 0f));
         UIManager.Instance.btnPhoneCall.SetColor("_BaseColor", new Color(0.0f, 1.0f, 0f));
-        AudioManager.Instance.PlayPhoneCall();
+        AudioManager.Instance.PlaySound("Ringtone");
         
     }
 
@@ -18,7 +18,7 @@ public class PhoneCall : IEvent
         UIManager.Instance.PhoneCallPopup.SetActive(false);
         UIManager.Instance.btnPhoneCall.SetColor("_EmissionColor", new Color(1.0f, 1.0f, 1f));
         UIManager.Instance.btnPhoneCall.SetColor("_BaseColor", new Color(1.0f, 1.0f, 1f));
-        AudioManager.Instance.StopPhoneCall();
+        AudioManager.Instance.StopSound("Ringtone");
     }
 
     public void FailedEvent()

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.13536826, g: 0.062860936, b: 0.10851535, a: 1}
+  m_IndirectSpecularColor: {r: 0.12958066, g: 0.07394148, b: 0.15530203, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -757,7 +757,7 @@ MonoBehaviour:
   - _name: Ringtone
     _clip: {fileID: 8300000, guid: 7241cf3f47f2ffd4385f8266b80d5655, type: 3}
     _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
-    _loop: 0
+    _loop: 1
     _volume: 1
     _pitch: 1
   - _name: Voice
