@@ -14,6 +14,11 @@ public class PlayerManager : MonoBehaviour
     private Vector2 leftDirection;
     private Vector2 rightDirection;
 
+    public Transform leftLimit;
+    public Transform rightLimit;
+    public Transform downLimit;
+    public Transform upLimit;
+
     private void FixedUpdate()
     {
         EvaluateDirection(leftDirection, rightDirection);
@@ -78,11 +83,13 @@ public class PlayerManager : MonoBehaviour
         if (leftDirection.y > 0)
         {
             // Right
+            if (transform.position.x > rightLimit.position.x) return;
             _rb.velocity = new Vector3(_navigationSpeed * Time.fixedDeltaTime, 0.0f, 0.0f);
         }
         else
         {
             // Left
+            if (transform.position.x < leftLimit.position.x) return;
             _rb.velocity = new Vector3(-_navigationSpeed * Time.fixedDeltaTime, 0.0f, 0.0f);
         }
     }
@@ -92,11 +99,13 @@ public class PlayerManager : MonoBehaviour
         if (leftDirection.y > 0)
         {
             // Up
+            if (transform.position.y > upLimit.position.y) return;
             _rb.velocity = new Vector3(0.0f, -_navigationSpeed * Time.fixedDeltaTime, 0.0f);
         }
         else
         {
             // Down
+            if (transform.position.y < downLimit.position.y) return;
             _rb.velocity = new Vector3(0.0f, _navigationSpeed * Time.fixedDeltaTime, 0.0f);
         }
     }
