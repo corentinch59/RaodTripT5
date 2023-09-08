@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LifeMaterial
-  m_Shader: {fileID: 4800000, guid: 066d73976dad7c14eb55a2cd7a48dad0, type: 3}
+  m_Shader: {fileID: 4800000, guid: 9a927a32aea46ae48a66261f790d5c76, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -99,6 +99,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _Health: 0.57
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
