@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public delegate void GameEvent();
@@ -18,16 +19,8 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    public float Speed
-    {
-        get { return _speed; }
-        set { _speed = value; }
-    }
-    public float MaxDynamoCharge
-    {
-        get { return _maxDynamoCharge; }
-        set { _maxDynamoCharge = value; }
-    }
+    public float Speed => _speed;
+    public float MaxDynamoCharge => _maxDynamoCharge;
     public float DynamoCharge
     {
         get { return _dynamoCharge; }
@@ -37,18 +30,46 @@ public class GameManager : MonoBehaviour
             DynamoFill?.Invoke();
         }
     }
-    public float ChargingValue
+    public float ChargingValue => _chargingValue;
+    public float DischargingValue => _dischargingValue;
+    public float OxygenCharge
     {
-        get { return _chargingValue; }
-        set { _chargingValue = value; }
+        get => _oxygenCharge;
+        set
+        {
+            _oxygenCharge = value;
+            _oxygenRatio = _oxygenCharge / _maxOxygenCharge;
+            OxygenFill?.Invoke();
+        }
     }
-    public float DischargingValue
+    public float OxygenRatio => _oxygenRatio;
+    public bool OxygenButton1Pressed
     {
-        get { return _dischargingValue; }
-        set { _dischargingValue = value; }
+        get => _oxygenButton1Pressed;
+        set => _oxygenButton1Pressed = value;
+    }
+    public bool OxygenButton2Pressed
+    {
+        get => _oxygenButton2Pressed;
+        set => _oxygenButton2Pressed = value;
+    }
+    public bool WiperActivated
+    {
+        get { return _wiperActivated; }
+        set { _wiperActivated = value; }
+    }
+
+    public float Health
+    {
+        get => _health;
+        set
+        {
+            _health = value;
+            HealthFill?.Invoke();
+        }
     }
     #endregion
-    
+
     private bool isPlaying = true;
     private float _dynamoCharge = 0;
 
@@ -57,9 +78,34 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _maxDynamoCharge;
     [SerializeField] private float _chargingValue;
     [SerializeField] private float _dischargingValue;
+    [SerializeField] private float _health;
+
+    private float _oxygenCharge;
+    [SerializeField] private float _maxOxygenCharge;
+    private float _oxygenRatio;
+    [SerializeField] private float _oxygenFillingAmount;
+    [SerializeField] private float _oxygenFillingSpeed;
+    private bool _isFillingOxygen = false;
+    [SerializeField] private float _oxygeneCoyoteTime = 0.5f;
+    [SerializeField] private float _oxygenLoosingAmount;
+    [SerializeField] private float _oxygenLoosingSpeed;
+    [SerializeField] private float _oxygenEventDuration;
+    private bool _oxygenButton1Pressed = false;
+    private bool _oxygenButton2Pressed = false;
+    private bool _oxygenEventOn = false;
+
+    private bool _wiperActivated = false;
+
+    private Cerveau _cerveau1;
+    private Cerveau _cerveau2;
+
+    [SerializeField] private float _timeBetweenEvents;
+    [SerializeField] private float _timeBetweenEvents2;
 
     public static GameEvent GameFinished;
     public static GameEvent DynamoFill;
+    public static GameEvent OxygenFill;
+    public static GameEvent HealthFill;
 
     private static GameManager _instance;
     public static GameManager Instance => _instance;
@@ -79,10 +125,20 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _cerveau1 = gameObject.AddComponent<Cerveau>();
+        _cerveau1.InitCerv(_timeBetweenEvents);
+        _cerveau2 = gameObject.AddComponent<Cerveau>();
+        _cerveau2.InitCerv(_timeBetweenEvents2);
+
         GameFinished += () => { Debug.Log("GameFinished"); };
-        _dynamoCharge = _maxDynamoCharge;
 
         DynamoFill += UpdateGoalDistance;
+        _dynamoCharge = _maxDynamoCharge;
+
+        OxygenCharge = _maxOxygenCharge;
+
+        Cerveau.NewBrainCycle(_cerveau1);
+        Cerveau.NewBrainCycle(_cerveau2);
     }
 
     private void Update()
@@ -99,6 +155,86 @@ public class GameManager : MonoBehaviour
         if(_dynamoCharge > 0)
         {
             GoalDistance = Mathf.Clamp(GoalDistance -= Speed, 0, float.MaxValue);
+        }
+    }
+
+    public void StartFillOxygen()
+    {
+        if (!_isFillingOxygen)
+        {
+            _isFillingOxygen = true;
+            StartCoroutine(FillOxygen());
+        }
+
+    }
+
+    private IEnumerator FillOxygen()
+    {
+        while (_isFillingOxygen)
+        {
+            if(_oxygenButton1Pressed && ((_oxygenRatio>= 0.25f && _oxygenRatio <0.5f) || (_oxygenRatio >= 0.75f && _oxygenRatio < 1.0f))){
+                OxygenCharge += _oxygenFillingAmount;
+                yield return new WaitForSeconds(_oxygenFillingSpeed);
+            }
+            else if(_oxygenButton2Pressed && ((_oxygenRatio >= 0.0f && _oxygenRatio < 0.25f) || (_oxygenRatio >= 0.50f && _oxygenRatio < 0.75f)))
+            {
+                OxygenCharge += _oxygenFillingAmount;
+                yield return new WaitForSeconds(_oxygenFillingSpeed);
+            }
+            else
+            {
+                yield return new WaitForSeconds(_oxygeneCoyoteTime);
+                if(!_oxygenButton1Pressed && !_oxygenButton2Pressed)
+                {
+                    _isFillingOxygen = false;
+                }
+
+            }
+        }
+
+    }
+
+    public void StartLosingOxygen()
+    {
+        _oxygenEventOn = true;
+        StartCoroutine(OxygenTimer());
+        StartCoroutine(LosingOxygen());
+    }
+    private IEnumerator OxygenTimer()
+    {
+        yield return new WaitForSeconds(_oxygenEventDuration);
+        _oxygenEventOn = false;
+    }
+
+    private IEnumerator LosingOxygen()
+    {
+        while(_oxygenCharge > 0 && _oxygenEventOn)
+        {
+            if (!_isFillingOxygen)
+            {
+                OxygenCharge -= _oxygenLoosingAmount;
+                yield return new WaitForSeconds(_oxygenLoosingSpeed);
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+        foreach (Cerveau cerveau in Cerveau.cerveaux)
+        {
+            if (cerveau.EventCerv is Oxygen)
+            {
+                cerveau.CompleteEvent();
+            }
+        }
+    }
+
+    public void DamageMecha(float damage)
+    {
+        _health = Mathf.Clamp(_health - damage, 0, 1);
+        if( _health <= 0)
+        {
+            //Game Over
         }
     }
 }
