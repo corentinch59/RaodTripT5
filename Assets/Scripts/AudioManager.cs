@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -6,6 +7,8 @@ public class AudioManager : MonoBehaviour
 {
     [SerializeField] private Sound[] _sounds;
     [SerializeField] private AudioMixer _audioMixer;
+
+    private IEnumerator _playPhoneCall;
 
     private static AudioManager _instance;
     public static AudioManager Instance => _instance;
@@ -26,6 +29,8 @@ public class AudioManager : MonoBehaviour
         {
             SetSound(sound);
         }
+
+        _playPhoneCall = _PlayPhoneCall();
     }
 
     private void SetSound(Sound sound)
@@ -53,7 +58,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(name + "doesn't exist");
+            Debug.Log(name + " doesn't exist");
         }
     }
 
@@ -62,4 +67,36 @@ public class AudioManager : MonoBehaviour
         source.clip = clip;
         source.Play();
     }
+
+    public void StopSound(string name)
+    {
+        Sound tempSound = Array.Find(_sounds, sound => sound.Name == name);
+        if(tempSound != null)
+        {
+            tempSound.Source.Stop();
+        }
+        else
+        {
+            Debug.Log(name + " doesn't exist");
+        }
+    }
+
+    public void PlayPhoneCall()
+    {
+        StartCoroutine(_playPhoneCall);
+    }
+    private IEnumerator _PlayPhoneCall()
+    {
+        PlaySound("Ringtone");
+        yield return new WaitForSeconds(4.2f);
+        PlaySound("Voice");
+    }
+    public void StopPhoneCall()
+    {
+        StopCoroutine(_playPhoneCall);
+        StopSound("Ringtone");
+        StopSound("Voice");
+
+    }
+
 }

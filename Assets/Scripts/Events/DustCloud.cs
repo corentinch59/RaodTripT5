@@ -5,7 +5,9 @@ public class DustCloud : IEvent
     public void BeginEvent()
     {
         Debug.Log("Dust Began");
+        AudioManager.Instance.PlaySound("DustCloud");
         UIManager.Instance.Dusts.SetActive(true);
+        
     }
 
     public void CompleteEvent()

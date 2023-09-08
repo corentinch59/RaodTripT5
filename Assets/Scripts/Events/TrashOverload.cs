@@ -11,6 +11,7 @@ public class TrashOverload : IEvent
     public void CompleteEvent()
     {
         Debug.Log("Trash Overload Completed");
+        AudioManager.Instance.PlaySound("Trash");
         UIManager.Instance.TrashOverloadPopup.SetActive(false);
     }
 

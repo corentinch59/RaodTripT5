@@ -1650,7 +1650,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9355c74eff3c2f84ab8164f7eff241a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sounds: []
+  _sounds:
+  - _name: AlarmClock
+    _clip: {fileID: 8300000, guid: 6cac8f44de647a34cacacd5aaddae5e4, type: 3}
+    _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
+    _loop: 1
+    _volume: 1
+    _pitch: 1
+  - _name: Ringtone
+    _clip: {fileID: 8300000, guid: 7241cf3f47f2ffd4385f8266b80d5655, type: 3}
+    _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
+    _loop: 0
+    _volume: 1
+    _pitch: 1
+  - _name: Voice
+    _clip: {fileID: 8300000, guid: d42b617fe13ff5246bbff748c0619be2, type: 3}
+    _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
+    _loop: 1
+    _volume: 1
+    _pitch: 1
+  - _name: DustCloud
+    _clip: {fileID: 8300000, guid: 71b6874f29ee8124282d912ae46f154c, type: 3}
+    _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
+    _loop: 0
+    _volume: 1
+    _pitch: 1
+  - _name: Trash
+    _clip: {fileID: 8300000, guid: 3911554af8b67224e8d56f23b90801ea, type: 3}
+    _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
+    _loop: 0
+    _volume: 1
+    _pitch: 1
+  - _name: AirLost
+    _clip: {fileID: 8300000, guid: 4df4f1bc4bb50e04f975c0c1aeeec286, type: 3}
+    _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
+    _loop: 1
+    _volume: 1
+    _pitch: 1
+  - _name: AirEnd
+    _clip: {fileID: 8300000, guid: 344006a5c4b63cb4b91b1f89559503ff, type: 3}
+    _output: {fileID: 24300002, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
+    _loop: 0
+    _volume: 1
+    _pitch: 1
   _audioMixer: {fileID: 24100000, guid: ca0d3c1b835b8764793ee9c48ec669a1, type: 2}
 --- !u!1 &997247398
 GameObject:
@@ -2018,13 +2060,13 @@ MonoBehaviour:
   _chargingValue: 1
   _dischargingValue: 0.1
   _health: 0
-  _maxOxygenCharge: 0
-  _oxygenFillingAmount: 0
-  _oxygenFillingSpeed: 0
+  _maxOxygenCharge: 24
+  _oxygenFillingAmount: 1
+  _oxygenFillingSpeed: 0.3
   _oxygeneCoyoteTime: 0.5
-  _oxygenLoosingAmount: 0
-  _oxygenLoosingSpeed: 0
-  _oxygenEventDuration: 0
+  _oxygenLoosingAmount: 1
+  _oxygenLoosingSpeed: 1
+  _oxygenEventDuration: 5
   _timeBetweenEvents: 3
   _timeBetweenEvents2: 6
 --- !u!4 &1227416515
@@ -2322,11 +2364,35 @@ MonoBehaviour:
     m_ActionId: 8298a004-c1f3-41dd-b5db-edb4de6c5c60
     m_ActionName: PlayerControls/RightJoystick[/Keyboard/i,/Keyboard/k]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1443814944}
+        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
+        m_MethodName: OnOxygenButton1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: cca0d182-263c-4f98-836e-e276f213f521
     m_ActionName: PlayerControls/Oxygen[/Keyboard/f]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1443814944}
+        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
+        m_MethodName: OnOxygenButton2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d94160ee-1861-4952-a9d9-8bf17b053205
     m_ActionName: PlayerControls/Oxygen2[/Keyboard/g]
   m_NeverAutoSwitchControlSchemes: 0

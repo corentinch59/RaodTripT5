@@ -201,7 +201,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""55c0ee11-7d95-4f5b-a447-a61bdded744e"",
-                    ""path"": ""<Keyboard>/t"",
+                    ""path"": ""<Keyboard>/v"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -289,7 +289,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""bb01a479-364d-4609-b6d3-d36cfcf42cda"",
-                    ""path"": ""<Keyboard>/g"",
+                    ""path"": ""<Keyboard>/n"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -300,7 +300,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5379d22a-a27f-432e-b11c-780f799b5368"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/b"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

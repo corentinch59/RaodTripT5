@@ -163,6 +163,7 @@ public class GameManager : MonoBehaviour
         if (!_isFillingOxygen)
         {
             _isFillingOxygen = true;
+            AudioManager.Instance.StopSound("AirLost");
             StartCoroutine(FillOxygen());
         }
 
@@ -191,7 +192,10 @@ public class GameManager : MonoBehaviour
 
             }
         }
-
+        if (_oxygenEventOn)
+        {
+            AudioManager.Instance.PlaySound("AirLost");
+        }
     }
 
     public void StartLosingOxygen()
