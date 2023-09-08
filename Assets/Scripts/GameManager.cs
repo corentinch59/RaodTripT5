@@ -230,7 +230,6 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-}
 
     public void DamageMecha(float damage)
     {
