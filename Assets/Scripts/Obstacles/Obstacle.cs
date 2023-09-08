@@ -17,6 +17,14 @@ public class Obstacle : MonoBehaviour
         ObstacleMovement();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "RoadDestroyer")
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public virtual void ObstacleMovement()
     {
         _rb.velocity = new Vector3(0.0f, 0.0f, -5000.0f * GameManager.Instance.Speed * Time.fixedDeltaTime);
