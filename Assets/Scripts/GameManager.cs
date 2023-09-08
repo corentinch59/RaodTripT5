@@ -68,6 +68,8 @@ public class GameManager : MonoBehaviour
             HealthFill?.Invoke();
         }
     }
+
+    public float MaxHealth => _maxHealth;
     #endregion
 
     private bool isPlaying = true;
@@ -79,6 +81,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _chargingValue;
     [SerializeField] private float _dischargingValue;
     [SerializeField] private float _health;
+    [SerializeField] private float _maxHealth;
 
     private float _oxygenCharge;
     [SerializeField] private float _maxOxygenCharge;

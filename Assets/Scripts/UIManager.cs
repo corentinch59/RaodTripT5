@@ -11,7 +11,10 @@ public class UIManager : MonoBehaviour
     #endregion
 
     [SerializeField] private TextMeshProUGUI _goalDistanceText;
+
     [SerializeField] private Material dynamoMat;
+    [SerializeField] private Material healthMat;
+    [SerializeField] private Material oxygenMat;
 
     [SerializeField] private Image _wiperImage;
     [SerializeField] private GameObject _dusts;
@@ -42,6 +45,7 @@ public class UIManager : MonoBehaviour
         GameManager.DynamoFill += UpdateDynamoFillUI;
         GameManager.DynamoFill += UpdateGoalDistanceUI;
         GameManager.OxygenFill += UpdateOxygenFillUI;
+        GameManager.HealthFill += UpdateHealthFillUI;
     }
 
     public void UpdateDynamoFillUI()
@@ -56,7 +60,12 @@ public class UIManager : MonoBehaviour
 
     public void UpdateOxygenFillUI()
     {
-        _oxygenSlider.value = GameManager.Instance.OxygenRatio;
+        oxygenMat.SetFloat("_Oxygen", GameManager.Instance.OxygenRatio);
+    }
+
+    public void UpdateHealthFillUI()
+    {
+        healthMat.SetFloat("_Health", GameManager.Instance.Health / GameManager.Instance.MaxHealth);
     }
 
     public void UpdateWiperUI()
