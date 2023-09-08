@@ -21,6 +21,16 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameObject _phoneCallPopup;
     [SerializeField] private GameObject _trashOverloadPopup;
+
+    [SerializeField] private Material btnTrashMat;
+    [SerializeField] public Material BtnTrashMat { 
+        get => btnTrashMat; 
+        set => btnTrashMat = value; 
+    }
+
+    public Material btnOxygenRedMat;
+    public Material btnPhoneCall;
+    public Material btnAlarmClock;
     
     private static UIManager _instance;
     public static UIManager Instance => _instance;
@@ -44,6 +54,17 @@ public class UIManager : MonoBehaviour
         GameManager.DynamoFill += UpdateGoalDistanceUI;
         GameManager.OxygenFill += UpdateOxygenFillUI;
         GameManager.HealthFill += UpdateHealthFillUI;
+
+        btnTrashMat.SetColor("_EmissionColor", new Color(1.0f, 1.0f, 1.0f));
+        btnTrashMat.SetColor("_BaseColor", new Color(1.0f, 1.0f, 1.0f));
+
+        btnAlarmClock.SetColor("_EmissionColor", new Color(1.0f, 1.0f, 1f));
+        btnAlarmClock.SetColor("_BaseColor", new Color(1.0f, 1.0f, 1f));
+
+        btnPhoneCall.SetColor("_EmissionColor", new Color(1.0f, 1.0f, 1f));
+        btnPhoneCall.SetColor("_BaseColor", new Color(1.0f, 1.0f, 1f));
+
+        btnOxygenRedMat.DisableKeyword("_EmissionMap");
     }
 
     public void UpdateDynamoFillUI()
