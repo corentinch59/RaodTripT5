@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
             {
                 isPlaying = false;
                 GameFinished?.Invoke();
+                GameOver?.Invoke();
             }
         }
     }
