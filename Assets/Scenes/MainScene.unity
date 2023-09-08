@@ -1112,7 +1112,7 @@ MonoBehaviour:
   _oxygeneCoyoteTime: 0.5
   _oxygenLoosingAmount: 1
   _oxygenLoosingSpeed: 1
-  _oxygenEventDuration: 5
+  _oxygenEventDuration: 10
   playerInput: {fileID: 1443814945}
   gameoverScreen: {fileID: 1775872714}
   _timeBetweenEvents: 6
